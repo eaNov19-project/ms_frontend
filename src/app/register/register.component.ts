@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['../login/login.component.css', './register.component.css']
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit() {
   }
