@@ -8,21 +8,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class QuestionDetailsComponent implements OnInit {
-  public id = 0;
 
   constructor(private route: ActivatedRoute) {
     this.route.params.subscribe(params => console.log(params));
   }
-  public items: { id: number, type: string, value: string }[] = [];
 
-  public append() {
-    this.id++;
-    this.items.push({ 'id': this.id, 'type': 'text', 'value': '' });
-  }
-
-  public remove(did) {
-    this.items = this.items.filter(x => x.id !== did);
-  }
   ngOnInit() {
   }
 
