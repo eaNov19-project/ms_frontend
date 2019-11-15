@@ -1,18 +1,31 @@
 <div class="form">
     <h1>Signup Form</h1>
-    <form >
-        <input class="text" type="text" name="Username" placeholder="Username" required minlength="4">
-        <input class="text email" type="email" name="email" placeholder="Email" required minlength="4">
-        <input class="text" type="password" name="password" placeholder="Password" required minlength="4">
-        <input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" required minlength="4">
-        <div class="wthree-text">
+    <form [formGroup]="registerForm" (validSubmit)="OnSubmitForm()">
+        <div class="form-group">
+            <input class="text" type="text" formControlName="username" placeholder="Username" >
+            <bfv-messages></bfv-messages>
+        </div>
+        <div class="form-group">
+            <input class="text email" type="email" formControlName="email" placeholder="Email" >
+            <bfv-messages></bfv-messages>
+        </div>
+        <div class="form-group">
+            <input class="text" type="password" formControlName="password" placeholder="Password" >
+            <bfv-messages></bfv-messages>
+        </div>
+        <div class="form-group">
+            <input class="text w3lpass" type="password" formControlName="confirmPassword" placeholder="Confirm Password" >
+            <bfv-messages></bfv-messages>
+        </div>
+
+         <!-- <div class="wthree-text">
             <label class="anim">
-                <input type="checkbox" class="checkbox" required>
+                <input type="checkbox" name="agree" class="checkbox" required>
                 <span>I Agree To The Terms & Conditions</span>
             </label>
             <div class="clear"> </div>
-        </div>
-        <button>signup</button>
+        </div> -->
+        <button  type="submit">signup</button>
     </form>
     <!-- <p>Already have an Account? <a href="/login"> Login Now!</a></p> -->
 </div>

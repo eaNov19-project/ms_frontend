@@ -50,9 +50,5 @@ export class LoginComponent implements OnInit {
         Validators.minLength(4)
       ])
     });
-    // this.signinForm = this.fb.group({
-    //   username: [null, [Validators.required, Validators.minLength(4)]],
-    //   password: [null, [Validators.required, Validators.minLength(4)]]
-    // });
   }
 }
