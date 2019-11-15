@@ -13,15 +13,14 @@ import {Router} from '@angular/router';
 export class AppComponent {
   constructor(private modalService: NgbModal, public auth: AuthService, private router: Router) {}
   title = 'q-and-a';
-
-  ngOnInit() {
-  }
   closeResult: string;
-  openLogin() {   
+
+
+  openLogin() {
     const modalRef = this.modalService.open(LoginComponent);
     modalRef.componentInstance.name = 'Login';
   }
-  openRegister() {   
+  openRegister() {
     const modalRef = this.modalService.open(RegisterComponent);
   }
   logout(){    

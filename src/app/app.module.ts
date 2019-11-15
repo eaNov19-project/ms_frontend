@@ -15,13 +15,31 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import {AuthService} from './services/auth.service';
+import { QuestionsComponent } from './questions/questions.component';
+import { QuestionDetailsComponent } from './question-details/question-details.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { UserQuestionsComponent } from './user-questions/user-questions.component';
+import { DataTablesModule } from 'angular-datatables';
+import { AddQuestionComponent } from './add-question/add-question.component';
+import { EditQuestionComponent } from './edit-question/edit-question.component';
+import { ViewQuestionComponent } from './view-question/view-question.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    QuestionsComponent,
+    QuestionDetailsComponent,
+    DashboardComponent,
+    SidebarComponent,
+    UserQuestionsComponent,
+    AddQuestionComponent,
+    EditQuestionComponent,
+    ViewQuestionComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +55,8 @@ import {AuthService} from './services/auth.service';
     ReactiveFormsModule,
     FormsModule,
     NgBootstrapFormValidationModule.forRoot(),
-    NgBootstrapFormValidationModule
+    NgBootstrapFormValidationModule,
+    DataTablesModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
