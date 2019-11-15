@@ -10,6 +10,8 @@ import { UserQuestionsComponent } from './user-questions/user-questions.componen
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { EditQuestionComponent } from './edit-question/edit-question.component';
 import { ViewQuestionComponent } from './view-question/view-question.component';
+import { UserAnswersComponent } from './user-answers/user-answers.component';
+import { EditAnswerComponent } from './edit-answer/edit-answer.component';
 
 
 const routes: Routes = [
@@ -22,7 +24,9 @@ const routes: Routes = [
   { path: 'user/questions', component: UserQuestionsComponent },
   { path: 'user/addquestion', component: AddQuestionComponent },
   { path: 'user/editquestion/:id', component: EditQuestionComponent },
-  { path: 'user/viewquestion/:id', component: ViewQuestionComponent}
+  { path: 'user/viewquestion/:id', component: ViewQuestionComponent },
+  { path: 'user/answers', component: UserAnswersComponent },
+  { path: 'user/editanswer/:id', component: EditAnswerComponent }
 ];
 
 @NgModule({

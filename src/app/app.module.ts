@@ -16,6 +16,8 @@ import { DataTablesModule } from 'angular-datatables';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { EditQuestionComponent } from './edit-question/edit-question.component';
 import { ViewQuestionComponent } from './view-question/view-question.component';
+import { UserAnswersComponent } from './user-answers/user-answers.component';
+import { EditAnswerComponent } from './edit-answer/edit-answer.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { ViewQuestionComponent } from './view-question/view-question.component';
     UserQuestionsComponent,
     AddQuestionComponent,
     EditQuestionComponent,
-    ViewQuestionComponent
+    ViewQuestionComponent,
+    UserAnswersComponent,
+    EditAnswerComponent
   ],
   imports: [
     BrowserModule,
