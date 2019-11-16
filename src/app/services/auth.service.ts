@@ -21,11 +21,11 @@ export class AuthService {
     return this.http.post<{ token: string }>(conf.BASE_URL + api.AUTH.LOGIN, {email, password})
       .pipe(
         map((result: any) => {
-          if (result.error) {
-            return false;
-          } else {
+          if (result.success) {
             tokenSetter(result.data.token);
             return true;
+          } else {
+            return false;
           }
         })
       );
@@ -50,15 +50,9 @@ export class AuthService {
     return (token !== null && token !== undefined && token !== '');
   }
 
-  getActiveUser(): AuthorizedUserModel {
-    if (!tokenGetter()) {
-      return null;
-    }
-    try {
-      return helper.decodeToken(tokenGetter());
-    } catch (e) {
-      tokenRemove();
-      return null;
-    }
+  public getToken() {    
+    const token = tokenGetter();
+    return (token !== null && token !== undefined && token !== '') ? token : '';
   }
+
 }

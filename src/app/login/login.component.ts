@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 import {first} from 'rxjs/operators';
+import { UserService } from '../services/user.service';
+import { SignupResult } from '../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,8 @@ export class LoginComponent implements OnInit {
   public signinForm: FormGroup;
   public error: string;
 
-  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService,public activeModal: NgbActiveModal) {}
+  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService,
+    public activeModal: NgbActiveModal, private userService: UserService) {}
   OnSubmitForm() {
 
     for (const i in this.signinForm.controls) {
@@ -29,10 +32,20 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (success) => {
+          console.log(success);
           if (success) {
-            this.router.navigate(['/']);
+            // this.userService.getUserByEmail(this.signinForm.value.email).subscribe(result => {
+            //   console.log(result);
+            // });
+            this.auth.signup({email:'natruong@mum.vn', password: '12345'}).subscribe(result => {
+                console.log(result);
+              });
+            // this.router.navigate(['/']);
+            console.log('login success');
+            this.activeModal.close('login success');
           } else {
             this.error = 'Could not sign in';
+            this.activeModal.dismiss(this.error);
           }
         },
         err => this.error = 'Could not authenticate'

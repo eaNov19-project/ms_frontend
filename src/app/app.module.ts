@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {JwtModule} from '@auth0/angular-jwt';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {conf} from './config/baseUrl.constant';
 import {tokenGetter} from './util/token.helper'; 
 
@@ -24,6 +24,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { EditQuestionComponent } from './edit-question/edit-question.component';
 import { ViewQuestionComponent } from './view-question/view-question.component';
+import { TokenInterceptor } from './services/token.interceptor';
 
 
 @NgModule({
@@ -58,7 +59,13 @@ import { ViewQuestionComponent } from './view-question/view-question.component';
     NgBootstrapFormValidationModule,
     DataTablesModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,   
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

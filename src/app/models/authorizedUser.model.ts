@@ -13,14 +13,3 @@ export function newAuthorizedUserModel() {
   ;
   return user;
 }
-
-export interface SignupResult {
-  success: string;
-  message: string;
-  data: {
-    auth: {
-      userId: number;
-      email: string;
-    }
-  }
-}
