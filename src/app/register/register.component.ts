@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import {first} from 'rxjs/operators';
+import { SignupResult } from '../models/authorizedUser.model';
 
 @Component({
   selector: 'app-register',
@@ -26,23 +27,29 @@ export class RegisterComponent implements OnInit {
     this.auth.signup(this.registerForm.value)
       .pipe(first())
       .subscribe(
-        (success) => {
-          if (success) {
-            this.router.navigate(['/']);
+        (result) => {
+          console.log(result);
+          if (result['success']) {
+            // this.router.navigate(['/']);
+            console.log('success signup');
+            this.activeModal.close('success signup');
           } else {
             this.error = 'Could not sign up';
+            console.log(result['message']);
+            this.activeModal.dismiss(this.error);
           }
         },
         err => this.error = 'Could not authenticate'
       );
+    
   }
   ngOnInit() {
     
     this.registerForm = new FormGroup({
-      username: new FormControl('', [
-        Validators.required,
-        Validators.minLength(4)
-      ]),
+      // username: new FormControl('', [
+      //   Validators.required,
+      //   Validators.minLength(4)
+      // ]),
       email: new FormControl('', [
         Validators.required,
         Validators.pattern(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)

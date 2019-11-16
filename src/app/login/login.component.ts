@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       this.signinForm.controls[i].updateValueAndValidity();
     }
 
-    this.auth.login(this.signinForm.value.username, this.signinForm.value.password)
+    this.auth.login(this.signinForm.value.email, this.signinForm.value.password)
       .pipe(first())
       .subscribe(
         (success) => {
@@ -41,9 +41,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     
     this.signinForm = new FormGroup({
-      username: new FormControl('', [
+      // username: new FormControl('', [
+      //   Validators.required,
+      //   Validators.minLength(4)
+      // ]),
+      email: new FormControl('', [
         Validators.required,
-        Validators.minLength(4)
+        Validators.pattern(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
       ]),
       password: new FormControl('', [
         Validators.required,
