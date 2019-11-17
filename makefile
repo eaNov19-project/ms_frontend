@@ -1,3 +1,5 @@
+docker-clean:
+	- docker rmi natruong/ms-frontend
 docker-build:
 	docker build -t natruong/ms-frontend .
 docker-run:

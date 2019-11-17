@@ -2,11 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {conf} from '../config/baseUrl.constant';
 import {api} from '../config/api.constant';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import { AuthorizedUserModel } from '../models/authorizedUser.model';
 import {tokenGetter, tokenRemove, tokenSetter} from '../util/token.helper'; 
+import { env } from '../environment/environment';
 
 const helper = new JwtHelperService();
 
@@ -18,7 +17,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<boolean> {
-    return this.http.post<{ token: string }>(conf.BASE_URL + api.AUTH.LOGIN, {email, password})
+    return this.http.post<{ token: string }>(env.BASE_URL + api.AUTH.LOGIN, {email, password})
       .pipe(
         map((result: any) => {
           if (result.success) {
@@ -32,7 +31,7 @@ export class AuthService {
   }
 
   signup(userObj: object): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(conf.BASE_URL + api.AUTH.REGISTER, userObj)
+    return this.http.post<{ token: string }>(env.BASE_URL + api.AUTH.REGISTER, userObj)
       .pipe(
         map(result => {
           return result;

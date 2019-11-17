@@ -27,6 +27,7 @@ import { ViewQuestionComponent } from './view-question/view-question.component';
 import { TokenInterceptor } from './services/token.interceptor';
 import { UserAnswersComponent } from './user-answers/user-answers.component';
 import { EditAnswerComponent } from './edit-answer/edit-answer.component';
+import { EditDashboardModalComponent } from './dashboard/edit-dashboard-modal.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { EditAnswerComponent } from './edit-answer/edit-answer.component';
     EditQuestionComponent,
     ViewQuestionComponent,
     UserAnswersComponent,
-    EditAnswerComponent
+    EditAnswerComponent,
+    EditDashboardModalComponent
   ],
   imports: [
     BrowserModule,
