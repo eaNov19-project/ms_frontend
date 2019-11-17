@@ -6,21 +6,22 @@ RUN mkdir -p /usr/src/ms-frontend
 
 # Installing dependencies.
 COPY package*.json /usr/src/ms-frontend/
-RUN npm install
+RUN npm install  
+# --save-dev
 # Copy ms-frontend source into image.
 COPY . /usr/src/ms-frontend
 WORKDIR /usr/src/ms-frontend
 
 # Set environment variables
 ENV ENVIRONMENT=production1
-ENV MS_AUTH="http://104.197.96.11:8080"
-ENV MS_USER="http://35.192.125.62:8080"
-ENV MS_QUESTIONS="http://104.154.33.123:8080"
-ENV MS_ANSWERS="http://104.154.33.123:8080"
-ENV MS_COMMENTS="http://104.154.33.123:8080"
+ENV MS_AUTH="http://auth-ms-service.default.svc.cluster.local:8080"
+ENV MS_USER="http://user-ms-service.default.svc.cluster.local:8080:8080"
+ENV MS_QUESTIONS="http://question-ms-service.default.svc.cluster.local:8080"
+ENV MS_ANSWERS="http://answer-ms-service.default.svc.cluster.local:8080"
+ENV MS_COMMENTS="http://comment-ms-service.default.svc.cluster.local:8080"
 # Building app.
 RUN npm run-script build-prod
-
+# 13
 
 ### STAGE 2: Setup ###
 FROM nginx:1.13.12-alpine

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-ms
+  labels:
+    app: frontend-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-ms
+  template:
+    metadata:
+      labels:
+        app: frontend-ms
+    spec:
+      containers:
+        - name: frontend-ms
+          image:  islamahmad/eaproj-frontend-ms:1.0.1
