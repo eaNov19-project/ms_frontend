@@ -19,7 +19,7 @@ ENV MS_QUESTIONS="http://104.154.33.123:8080"
 ENV MS_ANSWERS="http://104.154.33.123:8080"
 ENV MS_COMMENTS="http://104.154.33.123:8080"
 # Building app.
-RUN npm run-script build:prod
+RUN npm run-script build-prod
 
 
 ### STAGE 2: Setup ###
