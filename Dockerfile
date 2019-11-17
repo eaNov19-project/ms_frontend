@@ -13,8 +13,11 @@ WORKDIR /usr/src/ms-frontend
 
 # Set environment variables
 ENV ENVIRONMENT=production1
-ENV SomeAPIKey="This is not an API Key"
-ENV SomeOtherAPIKey="This is not another API Key"
+ENV MS_AUTH="http://104.197.96.11:8080"
+ENV MS_USER="http://35.192.125.62:8080"
+ENV MS_QUESTIONS="http://104.154.33.123:8080"
+ENV MS_ANSWERS="http://104.154.33.123:8080"
+ENV MS_COMMENTS="http://104.154.33.123:8080"
 # Building app.
 RUN npm run-script build:prod
 
