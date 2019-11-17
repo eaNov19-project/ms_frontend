@@ -10,8 +10,13 @@ RUN npm install
 # Copy ms-frontend source into image.
 COPY . /usr/src/ms-frontend
 WORKDIR /usr/src/ms-frontend
+
+# Set environment variables
+ENV ENVIRONMENT=production1
+ENV SomeAPIKey="This is not an API Key"
+ENV SomeOtherAPIKey="This is not another API Key"
 # Building app.
-RUN npm run-script build
+RUN npm run-script build:prod
 
 
 ### STAGE 2: Setup ###

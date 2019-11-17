@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {JwtModule} from '@auth0/angular-jwt';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {conf} from './config/baseUrl.constant';
 import {tokenGetter} from './util/token.helper'; 
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -56,7 +55,7 @@ import { EditDashboardModalComponent } from './dashboard/edit-dashboard-modal.co
     JwtModule.forRoot({
       config: {
         tokenGetter,
-        whitelistedDomains: [conf.DOMAIN_URL]
+        // whitelistedDomains: [conf.DOMAIN_URL]
       }
     }),
     ReactiveFormsModule,

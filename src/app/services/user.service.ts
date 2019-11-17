@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {api} from '../config/api.constant';
 import { userInfoGetter, userInfoSetter } from '../util/userinfo.helper';
 import { UserInfo } from '../models/user.model';
-import { env } from '../environment/environment';
+import { environment } from '../environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class UserService {
   }
 
     getUserByEmail(email: string): Observable<UserInfo> {
-        return this.http.get<UserInfo>(env.BASE_URL + api.USER.GET_BY_EMAIL + '/' + email, {}).pipe(
+        return this.http.get<UserInfo>(environment.baseUrl.MS_USER + api.USER.GET_BY_EMAIL + '/' + email, {}).pipe(
             map((result: any) => {
               if (result.success) {
                 console.dir(result);
@@ -31,7 +31,7 @@ export class UserService {
     }
 
     updateUserInfo(post: UserInfo): Observable<UserInfo> {
-        return this.http.post<UserInfo>(env.BASE_URL + api.USER.SAVE , post);
+        return this.http.post<UserInfo>(environment.baseUrl.MS_USER + api.USER.SAVE , post);
     }
 
     getActiveUser(): UserInfo {

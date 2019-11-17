@@ -1,6 +1,11 @@
-export let env = {
-    PROTOCOL: 'http://',
-    DOMAIN_URL: '104.154.33.123:8080',
-    BASE_URL: 'http://104.154.33.123:8080/prod'
-  };
-  
+export const environment = {
+    production: true,
+    environment: $ENV.ENVIRONMENT,
+    baseUrl: {
+        MS_AUTH: $ENV.MS_AUTH,
+        MS_USER: $ENV.MS_USER,
+        MS_QUESTIONS: $ENV.MS_QUESTIONS,
+        MS_ANSWERS: $ENV.MS_ANSWERS,
+        MS_COMMENTS: $ENV.MS_COMMENTS
+    }
+};
