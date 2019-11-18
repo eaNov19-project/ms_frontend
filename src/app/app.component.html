@@ -23,28 +23,38 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
-      <div *ngIf="auth.loggedIn">
-          <span>Welcome <a class="nav-link" [routerLink]="['dashboard']">{{auth.currentUser?.email}} </a></span>
-          <button class="btn btn-lg btn-outline-primary" (click)="logout()">Logout</button>
-      </div>
-      <div *ngIf="!auth.loggedIn">
-          <button class="btn btn-lg btn-outline-primary" (click)="openLogin()">Login</button>
-          <button class="btn btn-lg btn-outline-primary" (click)="openRegister()">Register</button>
-      </div>
-      
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+        Search
+      </button>
+    </form>
+    <div *ngIf="auth.loggedIn">
+      <span>Hi </span>
+      <button class="btn btn-lg btn-outline-primary" (click)="logout()">
+        Logout
+      </button>
+    </div>
+    <div *ngIf="!auth.loggedIn">
+      <button class="btn ml-2 ml-2 btn-success" (click)="openLogin()">
+        Login
+      </button>
+      <button class="btn ml-2 ml-2 btn-success" (click)="openRegister()">
+        Register
+      </button>
+    </div>
   </div>
 </nav>
-<div class="mt-5 " >
+<div class="mt-5 ">
   <div class="px-3 py-3 mt-5 mt-5 mx-auto ">
     <router-outlet></router-outlet>
   </div>
 </div>
-<div style="padding: 30px;">
-
-</div>
+<div style="padding: 30px;"></div>
 <!-- Footer -->
 <nav class="navbar navbar-fixed col-12  bg-dark text-white ">
   <div class="container rowtext-center">

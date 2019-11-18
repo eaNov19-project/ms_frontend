@@ -25,4 +25,5 @@ export interface Question {
     upvotes: number;
     topComments: any;
     topAnswers: any;
+    active: any;
 }
