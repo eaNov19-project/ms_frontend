@@ -11,6 +11,7 @@ export class QuestionsComponent implements OnInit {
 
   private questionsResult: QuestionsResult;
   private questions: Array<Question> = [];
+  private p: any;
 
   constructor(private questionService: QuestionService) {
   }
