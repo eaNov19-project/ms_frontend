@@ -7,6 +7,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {tokenGetter, tokenRemove, tokenSetter} from '../util/token.helper'; 
 import { environment } from 'src/environments/environment';
 import { userInfoGetter } from '../util/userinfo.helper';
+import { UserInfo } from '../models/user.model';
 
 const helper = new JwtHelperService();
 
@@ -49,7 +50,7 @@ export class AuthService {
     return (token !== null && token !== undefined && token !== '');
   }
 
-  public get currentUser(): any {
+  public get currentUser(): UserInfo {
     const user = JSON.parse(userInfoGetter()) ;
     return user;
   }

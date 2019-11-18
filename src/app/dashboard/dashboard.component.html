@@ -8,16 +8,16 @@
           <div class="col-md-4">
             <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip"
               src="https://bootdey.com/img/Content/user-453533-fdadfd.png" data-original-title="Usuario">
-            <ul title="Ratings" class="list-inline ratings text-center">
+            <!-- <ul title="Ratings" class="list-inline ratings text-center">
               <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
               <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
               <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
               <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
               <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-            </ul>
+            </ul> -->
           </div>
           <div class="col-md-6">
-            <strong>Information</strong><br>
+            <strong>Information</strong> <button class="btn btn-link" (click)="openEditModal()">Edit</button><br>
             <div class="table-responsive">
               <table class="table table-condensed table-responsive table-user-information">
                 <tbody>
@@ -29,7 +29,7 @@
                       </strong>
                     </td>
                     <td class="text-primary">
-                      Bootdey
+                      {{auth.currentUser?.name}} 
                     </td>
                   </tr>
 
@@ -41,7 +41,7 @@
                       </strong>
                     </td>
                     <td class="text-primary">
-                      noreply@email.com
+                      {{auth.currentUser?.email}} 
                     </td>
                   </tr>
 
@@ -53,18 +53,18 @@
                           </strong>
                         </td>
                         <td class="text-primary">
-                          34
+                          {{auth.currentUser?.noOfQuestions}} 
                         </td>
                       </tr>
                   <tr>
                     <td>
                       <strong>
                         <span class="glyphicon glyphicon-calendar text-primary"></span>
-                        created
+                        Last updated
                       </strong>
                     </td>
                     <td class="text-primary">
-                      20 jul 20014
+                      {{auth.currentUser?.lastUpdated}} 
                     </td>
                   </tr>
                 </tbody>
