@@ -1,13 +1,12 @@
-
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: frontend-ms
   namespace: default
 data:
-  MS_AUTH: "http://auth-ms-service.default.svc.cluster.local:8080"
-  MS_USER: "http://user-ms-service.default.svc.cluster.local:8080"
-  MS_QUESTIONS: "http://question-ms-service.default.svc.cluster.local:8080"
-  MS_ANSWERS: "http://answer-ms-service.default.svc.cluster.local:8080"
-  MS_COMMENTS: "http://comment-ms-service.default.svc.cluster.local:8080"
-  ENVIRONMENT: "production1"
+  MS_AUTH: http://auth-ms-service.default.svc.cluster.local:8080
+  MS_USER: http://user-ms-service.default.svc.cluster.local:8080
+  MS_QUESTIONS: http://question-ms-service.default.svc.cluster.local:8080
+  MS_ANSWERS: http://answer-ms-service.default.svc.cluster.local:8080
+  MS_COMMENTS: http://comment-ms-service.default.svc.cluster.local:8080
+  ENVIRONMENT: production1
