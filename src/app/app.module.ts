@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {JwtModule} from '@auth0/angular-jwt';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {tokenGetter} from './util/token.helper'; 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { tokenGetter } from './util/token.helper';
 
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import {AuthService} from './services/auth.service';
+import { AuthService } from './services/auth.service';
 import { QuestionsComponent } from './questions/questions.component';
 import { QuestionDetailsComponent } from './question-details/question-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -27,6 +27,8 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { UserAnswersComponent } from './user-answers/user-answers.component';
 import { EditAnswerComponent } from './edit-answer/edit-answer.component';
 import { EditDashboardModalComponent } from './dashboard/edit-dashboard-modal.component';
+import { QuestionService } from './services/question.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -64,13 +66,16 @@ import { EditDashboardModalComponent } from './dashboard/edit-dashboard-modal.co
     NgBootstrapFormValidationModule,
     DataTablesModule
   ],
-  providers: [AuthService,   
+  providers: [AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
-  ],
+    },
+    DataTablesModule,
+    HttpClientModule,
+    NgxPaginationModule,
+    QuestionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

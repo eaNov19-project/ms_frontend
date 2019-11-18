@@ -8,4 +8,3 @@ export let api = {
         SAVE: '/auth/add-auth'
     }
   };
-  

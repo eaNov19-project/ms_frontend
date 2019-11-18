@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Question, QuestionResult } from '../models/question.model';
+import { QuestionService } from '../services/question.service';
 
 @Component({
   selector: 'app-question-details',
@@ -9,11 +11,19 @@ import { ActivatedRoute } from '@angular/router';
 
 export class QuestionDetailsComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) {
-    this.route.params.subscribe(params => console.log(params));
+  private question: Question;
+  private questionResult: QuestionResult;
+  private questionId;
+
+  constructor(private route: ActivatedRoute, private questionService: QuestionService) {
+    this.route.params.subscribe(params => this.questionId = params.id);
   }
 
   ngOnInit() {
+    this.questionService.getQuestionById(this.questionId).subscribe(result => {
+      this.questionResult = result;
+      this.question = this.questionResult.data.question;
+    });
   }
 
 }
