@@ -51,7 +51,6 @@ import { QuestionSearchResultComponent } from './question-search-result/question
     UserAnswersComponent,
     EditAnswerComponent,
     EditDashboardModalComponent,
-    QuestionResultComponent,
     QuestionSearchResultComponent
   ],
   imports: [
