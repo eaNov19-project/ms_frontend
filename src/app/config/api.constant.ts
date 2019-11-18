@@ -6,5 +6,9 @@ export let api = {
     USER: {
         GET_BY_EMAIL: '/auth/login',
         SAVE: '/auth/add-auth'
+    },
+    QUESTION: {
+        LIST: '/questions',
+        BYID: '/questions/'
     }
   };

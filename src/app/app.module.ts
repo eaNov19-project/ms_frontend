@@ -31,6 +31,7 @@ import { QuestionService } from './services/question.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     NgBootstrapFormValidationModule.forRoot(),
     NgBootstrapFormValidationModule,
-    DataTablesModule
+    DataTablesModule,
+    NgxPaginationModule,
+    HttpClientModule
   ],
   providers: [AuthService,
     {
@@ -72,9 +75,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
       useClass: TokenInterceptor,
       multi: true
     },
-    DataTablesModule,
-    HttpClientModule,
-    NgxPaginationModule,
     QuestionService],
   bootstrap: [AppComponent]
 })
