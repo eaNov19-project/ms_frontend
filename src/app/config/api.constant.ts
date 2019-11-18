@@ -11,5 +11,15 @@ export let api = {
     QUESTION: {
         LIST: '/questions',
         BYID: '/questions/'
-    }
+    },
+    ANSWER: {
+        LISTBYQID: '/answers',
+        BYID: '/answers/',
+        UPVOTE: '/answers/',
+        DOWNVOTE: '/answers/'
+    },
+    COMMENT: {
+        LISTBYQID: '/comments/questions/',
+        LISTBYAID: 'comments/answers/',
+    },
   };

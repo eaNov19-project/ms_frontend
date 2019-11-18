@@ -29,7 +29,9 @@ import { EditAnswerComponent } from './edit-answer/edit-answer.component';
 import { EditDashboardModalComponent } from './dashboard/edit-dashboard-modal.component';
 import { QuestionService } from './services/question.service';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { AnswerService } from './services/answer.service';
+import { CommentService } from './services/comment.service';
+import { QuestionSearchResultComponent } from './question-search-result/question-search-result.component';
 
 
 @NgModule({
@@ -48,7 +50,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ViewQuestionComponent,
     UserAnswersComponent,
     EditAnswerComponent,
-    EditDashboardModalComponent
+    EditDashboardModalComponent,
+    QuestionSearchResultComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
       useClass: TokenInterceptor,
       multi: true
     },
-    QuestionService],
+    QuestionService,
+    AnswerService,
+    CommentService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
