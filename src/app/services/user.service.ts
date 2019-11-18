@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {api} from '../config/api.constant';
 import { userInfoGetter, userInfoSetter } from '../util/userinfo.helper';
 import { UserInfo } from '../models/user.model';
-import { environment } from '../environment/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

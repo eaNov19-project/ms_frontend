@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {api} from '../config/api.constant';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {tokenGetter, tokenRemove, tokenSetter} from '../util/token.helper'; 
-import { environment } from '../environment/environment';
+import { environment } from 'src/environments/environment';
 
 const helper = new JwtHelperService();
 
