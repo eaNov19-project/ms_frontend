@@ -16,4 +16,18 @@ spec:
     spec:
       containers:
         - name: frontend-ms
-          image:  islamahmad/eaproj-frontend-ms:1.0.1
+          image:  islamahmad/eaproj-frontend-ms:1.0.2
+          env:
+            - name: MS_AUTH
+              value: http://auth-ms-service.default.svc.cluster.local:8080
+            - name: MS_USER
+              value: http://user-ms-service.default.svc.cluster.local:8080
+            - name: MS_QUESTIONS
+              value: http://question-ms-service.default.svc.cluster.local:8080
+            - name: MS_ANSWERS
+              value: http://answer-ms-service.default.svc.cluster.local:8080
+            - name: MS_COMMENTS
+              value: http://comment-ms-service.default.svc.cluster.local:8080
+            - name: ENVIRONMENT
+              value: production1
+

@@ -1,0 +1,14 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-ms
+  namespace: default
+data:
+  MS_AUTH: "http://auth-ms-service.default.svc.cluster.local:8080"
+  MONGODB_PORT: "27017"
+  MONGODB_PASS: "comments"
+  MONGODB_USERNAME: "comments"
+  MONGODB_DATABASE: "comments"
+  MONGODB_AUTH: "comments"
+  AUTHENTICATE_SERVICE: "auth-ms-service.default.svc.cluster.local:8080"
