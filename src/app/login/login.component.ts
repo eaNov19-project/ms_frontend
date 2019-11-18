@@ -34,12 +34,12 @@ export class LoginComponent implements OnInit {
         (success) => {
           console.log(success);
           if (success) {
-            // this.userService.getUserByEmail(this.signinForm.value.email).subscribe(result => {
-            //   console.log(result);
-            // });
-            this.auth.signup({email:'natruong@mum.vn', password: '12345'}).subscribe(result => {
-                console.log(result);
-              });
+            this.userService.getUserByEmail(this.signinForm.value.email).subscribe(result => {
+              console.log(result);
+            });
+            // this.auth.signup({email:'natruong@mum.vn', password: '12345'}).subscribe(result => {
+            //     console.log(result);
+            //   });
             // this.router.navigate(['/']);
             console.log('login success');
             this.activeModal.close('login success');

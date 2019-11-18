@@ -4,8 +4,9 @@ export let api = {
         REGISTER: '/auth/add-auth'
     },
     USER: {
-        GET_BY_EMAIL: '/auth/login',
-        SAVE: '/auth/add-auth'
+        GET_BY_EMAIL: '/api/users/get',
+        REGISTER: '/api/users/add',
+        SAVE: '/api/users/edit'
     },
     QUESTION: {
         LIST: '/questions',

@@ -19,7 +19,7 @@ export class UserService {
             map((result: any) => {
               if (result.success) {
                 console.dir(result);
-                const strUserInfo = JSON.stringify(result.data);
+                const strUserInfo = JSON.stringify(result.data.user);
                 userInfoSetter(strUserInfo);
                 return result;
               } else {

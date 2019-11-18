@@ -6,6 +6,7 @@ import {api} from '../config/api.constant';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {tokenGetter, tokenRemove, tokenSetter} from '../util/token.helper'; 
 import { environment } from 'src/environments/environment';
+import { userInfoGetter } from '../util/userinfo.helper';
 
 const helper = new JwtHelperService();
 
@@ -31,12 +32,12 @@ export class AuthService {
   }
 
   signup(userObj: object): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(environment.baseUrl.MS_AUTH + api.AUTH.REGISTER, userObj)
-      .pipe(
-        map(result => {
-          return result;
-        })
-      );
+    return this.http.post<{ token: string }>(environment.baseUrl.MS_USER + api.USER.REGISTER, userObj)
+      // .pipe(
+      //   map(result => {
+      //     return result;
+      //   })
+      // );
   }
 
   logout() {
@@ -44,9 +45,13 @@ export class AuthService {
   }
 
   public get loggedIn(): boolean {
-    // tslint:disable-next-line:max-line-length
     const token = tokenGetter();
     return (token !== null && token !== undefined && token !== '');
+  }
+
+  public get currentUser(): string {
+    const user = JSON.parse(userInfoGetter()) ;
+    return user;
   }
 
   public getToken() {    
