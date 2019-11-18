@@ -49,7 +49,7 @@ export class AuthService {
     return (token !== null && token !== undefined && token !== '');
   }
 
-  public get currentUser(): string {
+  public get currentUser(): any {
     const user = JSON.parse(userInfoGetter()) ;
     return user;
   }

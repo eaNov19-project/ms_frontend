@@ -10,7 +10,7 @@ import { Question, QuestionsResult } from '../models/question.model';
 export class QuestionsComponent implements OnInit {
 
   private questionsResult: QuestionsResult;
-  private questions: Array<Question> = [];
+  questions: Array<Question> = [];
 
   constructor(private questionService: QuestionService) {
   }
