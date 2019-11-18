@@ -31,7 +31,7 @@ import { QuestionService } from './services/question.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AnswerService } from './services/answer.service';
 import { CommentService } from './services/comment.service';
-
+import { QuestionSearchResultComponent } from './question-search-result/question-search-result.component';
 
 
 @NgModule({
@@ -50,7 +50,9 @@ import { CommentService } from './services/comment.service';
     ViewQuestionComponent,
     UserAnswersComponent,
     EditAnswerComponent,
-    EditDashboardModalComponent
+    EditDashboardModalComponent,
+    QuestionResultComponent,
+    QuestionSearchResultComponent
   ],
   imports: [
     BrowserModule,
