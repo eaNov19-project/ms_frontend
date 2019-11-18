@@ -20,6 +20,7 @@ WORKDIR /usr/src/ms-frontend
 # ENV MS_ANSWERS="http://answer-ms-service.default.svc.cluster.local:8080"
 # ENV MS_COMMENTS="http://comment-ms-service.default.svc.cluster.local:8080"
 # Building app.
+RUN npm install
 RUN npm run-script build-prod
 # 13
 
