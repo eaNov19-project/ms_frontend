@@ -1,3 +1,5 @@
+import { CommentQuestion } from './comment.model';
+import { Answer } from './answer.model';
 
 export interface QuestionsResult {
     success: string;
@@ -23,7 +25,7 @@ export interface Question {
     created: Date;
     lastEdited: Date;
     upvotes: number;
-    topComments: any;
-    topAnswers: any;
-    active: any;
+    topComments: Array<CommentQuestion>;
+    topAnswers: Array<Answer>;
+    active: number;
 }

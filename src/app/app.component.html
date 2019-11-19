@@ -22,17 +22,17 @@
         >
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <form class=" col-6">
       <input
         class="form-control mr-sm-2"
         type="text"
-        placeholder="Search"
+        placeholder="Search Questions"
         aria-label="Search"
       />
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">
-        Search
-      </button>
     </form>
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+      Search
+    </button>
     <div *ngIf="auth.loggedIn">
       <span>Hi </span>
       <button class="btn btn-lg btn-outline-primary" (click)="logout()">
@@ -54,9 +54,8 @@
     <router-outlet></router-outlet>
   </div>
 </div>
-<div style="padding: 30px;"></div>
 <!-- Footer -->
-<nav class="navbar navbar-fixed col-12  bg-dark text-white ">
+<nav class="navbar col-12 mt-5 bg-dark text-white ">
   <div class="container text-center">
     <div class="col-md-3">
       <a href="#">About Us</a>
@@ -68,7 +67,7 @@
       <a href="#">Company</a>
     </div>
     <div class="col-md-3">
-      <a href="#">Team</a>
+      <a href="/team">Team</a>
     </div>
   </div>
   <div class="col-12 text-center">
