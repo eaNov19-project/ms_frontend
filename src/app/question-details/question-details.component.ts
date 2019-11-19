@@ -38,6 +38,8 @@ export class QuestionDetailsComponent implements OnInit {
     this.questionService.getQuestionById(this.questionId).subscribe(result => {
       this.questionResult = result;
       this.question = this.questionResult.data.question;
+      console.log("question: " + JSON.stringify(this.question));
+      console.log(this.question.body)
     });
   }
 
@@ -48,6 +50,8 @@ export class QuestionDetailsComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
+
  
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
