@@ -6,10 +6,14 @@ export let api = {
     USER: {
         GET_BY_EMAIL: '/api/users/get',
         REGISTER: '/api/users/add',
-        SAVE: '/api/users/edit'
+        SAVE: '/api/users/edit',
+        GET_BY_EMAIL_V2: '/users/get',
+        REGISTER_V2: '/users/add',
+        SAVE_V2: '/users/edit'
     },
     QUESTION: {
-        LIST: '/questions',
+        LIST: '/questions/',
+        ADD: '/questions',
         BYID: '/questions/'
     },
     ANSWER: {

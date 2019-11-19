@@ -46,6 +46,18 @@
                   </tr>
 
                   <tr>
+                    <td>
+                      <strong>
+                        <span class="glyphicon glyphicon-envelope text-primary"></span>
+                        Phone
+                      </strong>
+                    </td>
+                    <td class="text-primary">
+                      {{auth.currentUser?.phone}} 
+                    </td>
+                  </tr>
+
+                  <tr>
                         <td>
                           <strong>
                             <span class="glyphicon glyphicon-envelope text-primary"></span>
@@ -53,7 +65,7 @@
                           </strong>
                         </td>
                         <td class="text-primary">
-                          {{auth.currentUser?.noOfQuestions}} 
+                          <span><a class="nav-link" routerLink="/user/questions">{{auth.currentUser?.noOfQuestions}} </a></span>
                         </td>
                       </tr>
                   <tr>

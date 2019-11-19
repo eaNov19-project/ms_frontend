@@ -3,25 +3,38 @@
     <app-sidebar></app-sidebar>
     <div class="col-8">
         <div class="pb-4">
-          <a href="user/addquestion"><button class="btn btn-success"> Add Questions</button></a>
+            <button class="btn btn-success" (click)="openAddModal()"> Add Questions</button>
+          <!-- <a href="user/addquestion"><button class="btn btn-success"> Add Questions</button></a> -->
         </div>
       <table datatable class="row-border hover table table-bordered">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>#</th>
             <th>Question</th>
-            <th>Total Answers</th>
+            <th>Answers?</th>
+            <th>Edited</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Foo</td>
-            <td>Bar</td>
-            <td><a href="user/editquestion/1"><i class="text-success fas fa-edit"></i></a>&nbsp;&nbsp;
-              <a href="user/viewquestion/1"><i class="text-info fas fa-eye"></i></a>&nbsp;&nbsp;
-              <i class="text-danger fas fa-times"></i></td>
+          <tr *ngFor="let question of questions;let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{question.title}}</td>
+            <td>{{question.topAnswers?.length > 0 ? 'Yes' : 'No'}}</td>
+            <td>{{question.lastEdited}}</td>
+            <td>
+              <!-- <a [routerLink]="['/','user','editquestion',question.id]"> -->
+              <button class="btn btn-link" (click)="openEditModal(question.id)">
+                <!-- <i class="text-success fas fa-edit"></i> -->
+                <fa name="edit"></fa>
+              </button>&nbsp;&nbsp;
+              <a [routerLink]="['/','user','viewquestion',question.id]">
+                <!-- <i class="text-info fas fa-eye"></i> -->
+                <fa name="eye"></fa>
+              </a>&nbsp;&nbsp;
+              <!-- <i class="text-danger fas fa-times"></i> -->
+              <!-- <a (click)="removeQuestion(question.id)"><fa name="times"></fa></a> -->
+            </td>
           </tr>
         </tbody>
       </table>

@@ -15,7 +15,7 @@ export class UserService {
   }
 
     getUserByEmail(email: string): Observable<UserInfo> {
-        return this.http.get<UserInfo>(environment.baseUrl.MS_USER + api.USER.GET_BY_EMAIL + '/' + email, {}).pipe(
+        return this.http.get<UserInfo>(environment.baseUrl.API_GATEWAY + api.USER.GET_BY_EMAIL_V2 + '/' + email, {}).pipe(
             map((result: any) => {
               if (result.success) {
                 console.dir(result);
@@ -31,7 +31,12 @@ export class UserService {
     }
 
     updateUserInfo(post: UserInfo): Observable<UserInfo> {
-        return this.http.post<UserInfo>(environment.baseUrl.MS_USER + api.USER.SAVE , post);
+        return this.http.post<UserInfo>(environment.baseUrl.API_GATEWAY + api.USER.SAVE_V2 , post).pipe(
+          map((result: any) => {
+                console.dir(result);
+                return result;
+          })
+        );
     }
 
     getActiveUser(): UserInfo {

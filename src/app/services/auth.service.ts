@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<boolean> {
-    return this.http.post<{ token: string }>(environment.baseUrl.MS_AUTH + api.AUTH.LOGIN, {email, password})
+    return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.AUTH.LOGIN, {email, password})
       .pipe(
         map((result: any) => {
           if (result.success) {
@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   signup(userObj: object): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(environment.baseUrl.MS_USER + api.USER.REGISTER, userObj)
+    return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.USER.REGISTER_V2, userObj)
       // .pipe(
       //   map(result => {
       //     return result;
