@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Question } from '../models/question.model';
+import { QuestionService } from '../services/question.service';
 
 @Component({
   selector: 'app-question-search-result',
@@ -6,11 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./question-search-result.component.css']
 })
 export class QuestionSearchResultComponent implements OnInit {
+
+  questions: Array<Question> = [];
   p: any;
-  questions: any;
-  constructor() { }
+
+  constructor(private questionService: QuestionService) {
+  }
 
   ngOnInit() {
+    this.questionService.getAllQuestions().subscribe(result => {
+      this.questions = result.data.questions;
+    });
   }
 
 }

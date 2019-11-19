@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import {AuthService} from './services/auth.service';
-import {Router} from '@angular/router';
+import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +11,10 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private modalService: NgbModal, public auth: AuthService, private router: Router) {}
+  constructor(private modalService: NgbModal, public auth: AuthService, private router: Router) { }
   title = 'q-and-a';
   closeResult: string;
-
+  q = '';
 
   openLogin() {
     const modalRef = this.modalService.open(LoginComponent);
@@ -23,8 +23,14 @@ export class AppComponent {
   openRegister() {
     const modalRef = this.modalService.open(RegisterComponent);
   }
-  logout(){    
+  logout() {
     this.auth.logout();
     this.router.navigate(['/']);
+  }
+
+  searchQuestion() {
+    if (this.q !== '') {
+      this.router.navigate(['search/' + this.q]);
+    }
   }
 }

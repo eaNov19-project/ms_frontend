@@ -23,13 +23,12 @@
           </p>
           <div class="clearfix"></div>
           <p>
-            15 Minutes Ago
+            {{question?.created | date: 'dd-MMM-yyyy  h:mm a'}}
           </p>
           <div class="clearfix"></div>
-          <p>Lorem Ipsum is simply dummy text of the pr make but also the leap into electronic typesetting, remaining
-            essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
-            Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-            of Lorem Ipsum.</p>
+          <p>
+            {{question?.body}}
+          </p>
           <p>
               <button class="float-right btn btn-outline-primary ml-2" (click)="open(mymodal)">
                   <a> <i class="fa fa-reply"></i> Comment</a>
@@ -39,7 +38,7 @@
         <p>&nbsp;</p>
       </div>
 
-      <div class="card card-inner">
+      <div class="card card-inner" >
         <div class="card-body">
           <div class="row">
 
@@ -112,15 +111,14 @@
         </button>
       </div>
       <div class="modal-body">
-          <h3>Your Comment</h3>
-          <div class="form-group">
-            <textarea rows="8" class="form-control"></textarea>
-          </div>
-    
+            <h3>Your Comment</h3>
+            <div class="form-group">
+              <textarea rows="8" [formControl]="comment" class="form-control"></textarea>
+            </div>          
       </div>
       <div class="modal-footer" style="justify-content: space-between!important;">
           <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-          <button class="btn btn-info">Submit</button>       
+          <button class="btn btn-info" (click)="submitComment()">Submit</button>       
       </div>
     </ng-template>
   </div>

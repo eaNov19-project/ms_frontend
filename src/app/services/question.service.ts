@@ -23,7 +23,7 @@ export class QuestionService {
     }
 
     getQuestionById(id: any): Observable<any> {
-        return this.http.get(environment.baseUrl.API_GATEWAY + api.QUESTION.BYID + id ).pipe(
+        return this.http.get(environment.baseUrl.API_GATEWAY + api.QUESTION.BYID + id).pipe(
             map(result => {
                 return result;
             })
@@ -32,6 +32,14 @@ export class QuestionService {
 
     addQuestion(questionObj: object): Observable<{ token: string }> {
         return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.QUESTION.ADD, questionObj);
-      }
-    
+    }
+
+    searchQuestion(query: any): Observable<any> {
+        return this.http.get(environment.baseUrl.API_GATEWAY + api.QUESTION.SEARCH + query).pipe(
+            map(result => {
+                return result;
+            })
+        );
+    }
+
 }

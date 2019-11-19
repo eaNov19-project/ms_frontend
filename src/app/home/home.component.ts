@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { QuestionService } from '../services/question.service';
+import { Question, QuestionsResult } from '../models/question.model';
+
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  questions: Array<Question> = [];
+
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit() {
+    this.questionService.getAllQuestions().subscribe(result => {
+      this.questions = result.data.questions.slice(0, 7);
+    });
   }
 
 }
