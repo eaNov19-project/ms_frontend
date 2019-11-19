@@ -9,18 +9,15 @@ import { Question, QuestionsResult } from '../models/question.model';
 })
 export class QuestionsComponent implements OnInit {
 
-  private questionsResult: QuestionsResult;
   questions: Array<Question> = [];
   p: any;
+  
   constructor(private questionService: QuestionService) {
   }
 
   ngOnInit() {
     this.questionService.getAllQuestions().subscribe(result => {
-      this.questionsResult = result;
-      this.questionsResult.data.questions.forEach(element => {
-        this.questions.push(element);
-      });
+      this.questions = result.data.questions;
     });
   }
 

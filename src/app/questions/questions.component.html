@@ -1,7 +1,7 @@
 <div class="container pt-5">
   <div class="starter-template">
     <div class="list-group">
-      <!-- <div *ngFor="let question of questions "> -->
+    <h4 class="pb-2">{{questions.length}} Questions listed </h4>
         <div *ngFor="let question of questions | paginate: { itemsPerPage: 10, currentPage: p }">
       <a  href="/questionDetails/{{question.id}}" class="list-group-item list-group-item-action flex-column align-items-start " >
         <div class="d-flex w-100 justify-content-between">

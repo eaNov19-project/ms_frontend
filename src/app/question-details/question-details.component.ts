@@ -36,8 +36,7 @@ export class QuestionDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.questionService.getQuestionById(this.questionId).subscribe(result => {
-      this.questionResult = result;
-      this.question = this.questionResult.data.question;
+      this.question = result.data.question;
     });
   }
 
