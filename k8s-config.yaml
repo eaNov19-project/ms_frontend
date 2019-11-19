@@ -4,6 +4,7 @@ metadata:
   name: frontend-ms
   namespace: default
 data:
+  API_GATEWAY: http://35.190.69.70
   MS_AUTH: http://auth-ms-service.default.svc.cluster.local:8080
   MS_USER: http://user-ms-service.default.svc.cluster.local:8080
   MS_QUESTIONS: http://question-ms-service.default.svc.cluster.local:8080
