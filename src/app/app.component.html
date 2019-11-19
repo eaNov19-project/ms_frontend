@@ -22,22 +22,28 @@
         >
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+    <form class=" col-6">
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        placeholder="Search Questions"
+        aria-label="Search"
+      />
+    </form>
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+      Search
+    </button>
       <div *ngIf="auth.loggedIn">
           <span><a class="nav-link" [routerLink]="['dashboard']">Hi {{auth.currentUser?.email}} </a></span>
-          <button class="btn btn-lg btn-outline-primary" (click)="logout()">Logout</button>
+          <button class="btn ml-2 ml-2 btn-danger" (click)="logout()">Logout</button>
       </div>
       <div *ngIf="!auth.loggedIn">
-          <button class="btn btn-lg btn-outline-primary" (click)="openLogin()">Login</button>
-          <button class="btn btn-lg btn-outline-primary" (click)="openRegister()">Register</button>
+          <button class="btn ml-2 ml-2 btn-success" (click)="openLogin()">Login</button>
+          <button class="btn ml-2 ml-2 btn-success" (click)="openRegister()">Register</button>
       </div>
-      
   </div>
 </nav>
-<div class="mt-5 ">
+<div class="mt-5 " style="min-height: 700px;">
   <div class="px-3 py-3 mt-5 mt-5 mx-auto ">
     <router-outlet></router-outlet>
   </div>

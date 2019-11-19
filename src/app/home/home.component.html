@@ -4,4 +4,19 @@
     <h1>Welcome To Q&A</h1>
     <p>Feel free to explore as you like</p>
   </div>
+  <h2>Recent Questions</h2>
+  <div class="list-group">
+    <!-- <div *ngFor="let question of questions "> -->
+      <div *ngFor="let question of questions">
+    <a  href="/questionDetails/{{question.id}}" class="list-group-item list-group-item-action flex-column align-items-start " >
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-2 h5">{{ question.title }}</h5>
+        <small>{{question.created | date: 'dd-MMM-yyyy  h:mm a'}}</small>
+      </div>
+      <p class="mb-2">{{ question.body }}</p>
+      <small *ngFor="let comment of question.topComments">{{ comment.body }}<br></small>
+    </a>
+  </div>
+  </div>
+
 </div><!-- /.container -->
