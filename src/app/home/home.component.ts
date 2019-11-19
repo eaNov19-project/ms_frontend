@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.questionService.getAllQuestions().subscribe(result => {
-      this.questions = result.data.questions.slice(0,7);
+      this.questions = result.data.questions.slice(0, 7);
     });
   }
 

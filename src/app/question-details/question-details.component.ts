@@ -16,9 +16,9 @@ import { resource } from 'selenium-webdriver/http';
 
 export class QuestionDetailsComponent implements OnInit {
 
-  private question: Question;
-  private questionResult: QuestionResult;
-  private questionId;
+  question: Question;
+  questionResult: QuestionResult;
+  questionId;
   closeResult: string;
   modalOptions: NgbModalOptions;
   comment: any;
@@ -59,7 +59,6 @@ export class QuestionDetailsComponent implements OnInit {
   }
 
 
-
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -77,7 +76,7 @@ export class QuestionDetailsComponent implements OnInit {
 
   submitAnswer(questionId: any) {
     let questnId = questionId;
-    let answer = this.answer.value;
+    let answer = {body: this.answer.value};
     console.log("Answered entered: " + answer);
     console.log("id: " + questnId);
 
