@@ -19,7 +19,7 @@ export class UserQuestionsComponent implements OnInit {
   constructor(private questionService: QuestionService, private auth: AuthService, private modalService: NgbModal) { }
   getQuestions(){
     // this.questionService.getQuestionByUser()
-    this.questionService.getAllQuestions().pipe(first())
+    this.questionService.getQuestionsByUser(this.auth.currentUser.userId).pipe(first())
     .subscribe(
       (result) => {
         console.log(result);
