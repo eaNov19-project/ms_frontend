@@ -112,15 +112,14 @@
         </button>
       </div>
       <div class="modal-body">
-          <h3>Your Comment</h3>
-          <div class="form-group">
-            <textarea rows="8" class="form-control"></textarea>
-          </div>
-    
+            <h3>Your Comment</h3>
+            <div class="form-group">
+              <textarea rows="8" [formControl]="comment" class="form-control"></textarea>
+            </div>          
       </div>
       <div class="modal-footer" style="justify-content: space-between!important;">
           <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-          <button class="btn btn-info">Submit</button>       
+          <button class="btn btn-info" (click)="submitComment()">Submit</button>       
       </div>
     </ng-template>
   </div>

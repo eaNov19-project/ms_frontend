@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Question, QuestionResult } from '../models/question.model';
 import { QuestionService } from '../services/question.service';
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-question-details',
@@ -17,6 +18,7 @@ export class QuestionDetailsComponent implements OnInit {
   private questionId;
   closeResult: string;
   modalOptions:NgbModalOptions;
+  comment: any;
 
 
   constructor(private route: ActivatedRoute, private questionService: QuestionService, 
@@ -27,7 +29,9 @@ export class QuestionDetailsComponent implements OnInit {
       backdropClass:'customBackdrop',
       centered: true,
       size: "lg"
-    }
+    };
+
+    this.comment = new FormControl("Type in your thoughts here");
   }
 
   ngOnInit() {
@@ -53,6 +57,11 @@ export class QuestionDetailsComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  submitComment() {
+    let comment = this.comment.value;
+    console.log("Comment entered: " +comment);
   }
   
 
