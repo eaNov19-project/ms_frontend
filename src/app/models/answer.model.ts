@@ -1,3 +1,4 @@
+import { CommentAnswer } from './comment.model';
 
 export interface AnswersResult {
     success: string;
@@ -20,7 +21,7 @@ export interface Answer {
     body: string;
     date: Date;
     upvotes: number;
-    topComments: any;
+    topComments: Array<CommentAnswer>;
     questionId: string;
     userId: string;
     userName: string;

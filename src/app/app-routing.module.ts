@@ -13,6 +13,7 @@ import { ViewQuestionComponent } from './view-question/view-question.component';
 import { UserAnswersComponent } from './user-answers/user-answers.component';
 import { EditAnswerComponent } from './edit-answer/edit-answer.component';
 import { EditDashboardModalComponent } from './dashboard/edit-dashboard-modal.component';
+import { TeamComponent } from './team/team.component';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'user/editquestion/:id', component: EditQuestionComponent },
   { path: 'user/viewquestion/:id', component: ViewQuestionComponent },
   { path: 'user/answers', component: UserAnswersComponent },
-  { path: 'user/editanswer/:id', component: EditAnswerComponent }
+  { path: 'user/editanswer/:id', component: EditAnswerComponent },
+  { path: 'team', component: TeamComponent}
 ];
 
 @NgModule({
