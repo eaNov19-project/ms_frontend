@@ -1,12 +1,12 @@
-docker-clean:
+clean:
 	- docker rmi islamahmad/eaproj-ms-frontend
-docker-build:
-	docker build -t islamahmad/eaproj-ms-frontend:1.0.3 .
-docker-push:
-	docker push islamahmad/eaproj-ms-frontend:1.0.3
-kube-config:
+build:
+	docker build -t islamahmad/eaproj-ms-frontend:1.0.4 .
+push:
+	docker push islamahmad/eaproj-ms-frontend:1.0.4
+config:
 	kubectl apply -f k8s-config.yaml
-kube-deploy:
+deploy:
 	kubectl apply -f k8s-deploy.yaml
-docker-run:
+run:
 	docker run -d -p 80:80 --name finalproj islamahmad/eaproj-ms-frontend
