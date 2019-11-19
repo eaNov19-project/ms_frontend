@@ -20,7 +20,8 @@ export let api = {
         LISTBYQID: '/answers',
         BYID: '/answers/',
         UPVOTE: '/answers/',
-        DOWNVOTE: '/answers/'
+        DOWNVOTE: '/answers/',
+        ADD: '/answers/'
     },
     COMMENT: {
         LISTBYQID: '/comments/questions/',

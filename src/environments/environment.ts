@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   environment: 'development',
   baseUrl: {
-      API_GATEWAY: 'http://35.190.69.70',
+      API_GATEWAY: 'http://35.241.22.50',
       MS_AUTH: 'http://104.197.96.11:8080',
       MS_USER: 'http://35.192.125.62:8080',
       MS_QUESTIONS: 'http://35.190.69.70',

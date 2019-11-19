@@ -46,4 +46,8 @@ export class AnswerService {
         );
     }
 
+    addAnswer(answerObj: object, QID:any): Observable<{ token: string }> {
+        return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.ANSWER.ADD + QID, answerObj);
+    }
+
 }
