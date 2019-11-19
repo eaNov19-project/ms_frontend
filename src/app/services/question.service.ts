@@ -15,7 +15,7 @@ export class QuestionService {
     }
 
     getAllQuestions(): Observable<any> {
-        return this.http.get(environment.baseUrl.MS_QUESTIONS + api.QUESTION.LIST).pipe(
+        return this.http.get(environment.baseUrl.API_GATEWAY + api.QUESTION.LIST).pipe(
             map(result => {
                 return result;
             })
@@ -23,7 +23,7 @@ export class QuestionService {
     }
 
     getQuestionById(id: any): Observable<any> {
-        return this.http.get(environment.baseUrl.MS_QUESTIONS + api.QUESTION.BYID + id).pipe(
+        return this.http.get(environment.baseUrl.API_GATEWAY + api.QUESTION.BYID + id).pipe(
             map(result => {
                 return result;
             })
