@@ -1,9 +1,9 @@
 clean:
 	- docker rmi islamahmad/eaproj-frontend-ms
 build:
-	docker build -t islamahmad/eaproj-frontend-ms:1.0.4 .
+	docker build -t islamahmad/eaproj-frontend-ms:1.0.6 .
 push:
-	docker push islamahmad/eaproj-frontend-ms:1.0.4
+	docker push islamahmad/eaproj-frontend-ms:1.0.6
 config:
 	kubectl apply -f k8s-config.yaml
 deploy:

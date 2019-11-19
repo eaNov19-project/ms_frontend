@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend-ms
-          image:  islamahmad/eaproj-frontend-ms:1.0.2
+          image:  islamahmad/eaproj-frontend-ms:1.0.6
           envFrom:
             - configMapRef:
                 name: frontend-ms
