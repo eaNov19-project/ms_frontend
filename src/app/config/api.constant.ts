@@ -9,7 +9,7 @@ export let api = {
         SAVE: '/api/users/edit'
     },
     QUESTION: {
-        LIST: '/questions',
+        LIST: '/questions/',
         BYID: '/questions/'
     },
     ANSWER: {
