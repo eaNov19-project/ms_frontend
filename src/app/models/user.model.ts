@@ -11,8 +11,10 @@ export interface SignupResult {
 }
 
 export interface UserInfo {
+  userId: number;
   name: string;
   email: string;
-  questionNumber: number;
-  lastModified: Date;
+  phone: string;
+  noOfQuestions: number;
+  lastUpdated: string;
 }

@@ -12,6 +12,7 @@ import { EditQuestionComponent } from './edit-question/edit-question.component';
 import { ViewQuestionComponent } from './view-question/view-question.component';
 import { UserAnswersComponent } from './user-answers/user-answers.component';
 import { EditAnswerComponent } from './edit-answer/edit-answer.component';
+import { EditDashboardModalComponent } from './dashboard/edit-dashboard-modal.component';
 import { TeamComponent } from './team/team.component';
 
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'questions', component: QuestionsComponent },
   { path: 'questionDetails/:id', component: QuestionDetailsComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'edit/user', component: EditDashboardModalComponent },
   { path: 'user/questions', component: UserQuestionsComponent },
   { path: 'user/addquestion', component: AddQuestionComponent },
   { path: 'user/editquestion/:id', component: EditQuestionComponent },

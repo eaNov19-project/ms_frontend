@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./question-search-result.component.css']
 })
 export class QuestionSearchResultComponent implements OnInit {
-
+  p: any;
+  questions: any;
   constructor() { }
 
   ngOnInit() {

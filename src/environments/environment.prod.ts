@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   environment: $ENV.ENVIRONMENT,
   baseUrl: {
+      API_GATEWAY: 'http://34.98.66.141',
       MS_AUTH: $ENV.MS_AUTH,
       MS_USER: $ENV.MS_USER,
       MS_QUESTIONS: $ENV.MS_QUESTIONS,

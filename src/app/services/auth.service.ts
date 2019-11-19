@@ -7,6 +7,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {tokenGetter, tokenRemove, tokenSetter} from '../util/token.helper'; 
 import { environment } from 'src/environments/environment';
 import { userInfoGetter } from '../util/userinfo.helper';
+import { UserInfo } from '../models/user.model';
 
 const helper = new JwtHelperService();
 
@@ -18,7 +19,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<boolean> {
-    return this.http.post<{ token: string }>(environment.baseUrl.MS_AUTH + api.AUTH.LOGIN, {email, password})
+    return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.AUTH.LOGIN, {email, password})
       .pipe(
         map((result: any) => {
           if (result.success) {
@@ -32,7 +33,7 @@ export class AuthService {
   }
 
   signup(userObj: object): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(environment.baseUrl.MS_USER + api.USER.REGISTER, userObj)
+    return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.USER.REGISTER_V2, userObj)
       // .pipe(
       //   map(result => {
       //     return result;
@@ -49,7 +50,7 @@ export class AuthService {
     return (token !== null && token !== undefined && token !== '');
   }
 
-  public get currentUser(): any {
+  public get currentUser(): UserInfo {
     const user = JSON.parse(userInfoGetter()) ;
     return user;
   }
