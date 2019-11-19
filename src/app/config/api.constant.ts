@@ -14,7 +14,8 @@ export let api = {
     QUESTION: {
         LIST: '/questions/',
         ADD: '/questions',
-        BYID: '/questions/'
+        BYID: '/questions/',
+        SEARCH: '/search/'
     },
     ANSWER: {
         LISTBYQID: '/answers',
