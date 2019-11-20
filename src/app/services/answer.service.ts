@@ -30,24 +30,24 @@ export class AnswerService {
         );
     }
 
-    upvoteAnswer(id: any): Observable<any> {
-        return this.http.get(environment.baseUrl.MS_ANSWERS + api.ANSWER.UPVOTE + id).pipe(
-            map(result => {
-                return result;
-            })
-        );
-    }
-
-    downvoteAnswer(id: any): Observable<any> {
-        return this.http.get(environment.baseUrl.MS_ANSWERS + api.ANSWER.DOWNVOTE + id).pipe(
-            map(result => {
-                return result;
-            })
-        );
-    }
-
     addAnswer(answerObj: object, QID:any): Observable<{ token: string }> {
         return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.ANSWER.ADD + QID, answerObj);
     }
+    upVoteAnswer(answerId: any):  Observable<{ token: string }> {
+        return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + "/answers/" + answerId + api.ANSWER.UPVOTE, {}).pipe(
+            map(result => {
+                return result;
+            })
+        );
+    }
+
+    downVoteAnswer(answerId: any):  Observable<{ token: string }> {
+        return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + "/answers/" + answerId + api.ANSWER.DOWNVOTE, {}).pipe(
+            map(result => {
+                return result;
+            })
+        );
+    }
+
 
 }

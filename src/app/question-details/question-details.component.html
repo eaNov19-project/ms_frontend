@@ -11,10 +11,10 @@
               <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman
                   Akash</strong></a>
 
-              <small class="float-right" style="cursor: pointer;">
-                <span class="font-weight-bold text-success" title="Upvote"> <i class="fa fa-thumbs-up"></i>
+              <small class="float-right" >
+                <span class="font-weight-bold text-success" style="cursor: pointer;" title="Upvote" (click)="upVoteQuestion(question?.id)"> <i class="fa fa-thumbs-up"></i>
                 </span> &nbsp; {{question?.upvotes}} &nbsp;
-                <span class="font-weight-bold text-danger" title="Downvote">
+                <span class="font-weight-bold text-danger" style="cursor: pointer;" title="Downvote" (click)="downVoteQuestion(question?.id)">
                   <i class="fa fa-thumbs-down"></i>
                 </span>
               </small>
@@ -58,10 +58,10 @@
                   <a href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman
                       Akash</strong></a>
 
-                  <small class="float-right" style="cursor: pointer;">
-                    <span class="font-weight-bold text-success" title="Upvote"> <i class="fa fa-thumbs-up"></i>
-                    </span> &nbsp;  &nbsp;
-                    <span class="font-weight-bold text-danger" title="Downvote">
+                  <small class="float-right">
+                    <span class="font-weight-bold text-success" title="Upvote" style="cursor: pointer;" (click)="upVoteAnswer(answer?.id)"> <i class="fa fa-thumbs-up"></i>
+                    </span> &nbsp; {{answer?.upvotes}} &nbsp;
+                    <span class="font-weight-bold text-danger" title="Downvote" style="cursor: pointer;" (click)="downVoteAnswer(answer?.id)">
                       <i class="fa fa-thumbs-down"></i>
                     </span>
                   </small>

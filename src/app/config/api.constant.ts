@@ -16,13 +16,15 @@ export let api = {
         LIST_BY_USER: '/questions/users/',
         ADD: '/questions/',
         BYID: '/questions/',
-        SEARCH: '/search/'
+        SEARCH: '/search/',
+        UPVOTE: '/upvote',
+        DOWNVOTE: '/downvote'
     },
     ANSWER: {
         LISTBYQID: '/answers',
         BYID: '/answers/',
-        UPVOTE: '/answers/',
-        DOWNVOTE: '/answers/',
+        UPVOTE: '/upvote',
+        DOWNVOTE: '/donwvote',
         ADD: '/answers/'
     },
     COMMENT: {

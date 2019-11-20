@@ -23,8 +23,8 @@ export class QuestionDetailsComponent implements OnInit {
   modalOptions: NgbModalOptions;
   comment: any;
   answer: any;
-  questionIdCommented:any;
-  answerIdCommented:any;
+  questionIdCommented: any;
+  answerIdCommented: any;
 
 
   constructor(private route: ActivatedRoute,
@@ -59,12 +59,12 @@ export class QuestionDetailsComponent implements OnInit {
     this.questionIdCommented = null;
     this.modalService.open(content, this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-     
+
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     this.questionIdCommented = questionId;
-    console.log("Question Id: " +  this.questionIdCommented );
+    console.log("Question Id: " + this.questionIdCommented);
   }
 
   openAnswerComment(content, answerId) {
@@ -72,7 +72,7 @@ export class QuestionDetailsComponent implements OnInit {
     this.answerIdCommented = null;
     this.modalService.open(content, this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-     
+
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
@@ -91,60 +91,115 @@ export class QuestionDetailsComponent implements OnInit {
   }
 
   submitComment() {
-    if(this.answerIdCommented == null && this.questionIdCommented != null) {
-        this.submitQuestionComment();
-    } 
-    if(this.answerIdCommented != null && this.questionIdCommented == null) {
-        this.submitAnswerComment();
+    if (this.answerIdCommented == null && this.questionIdCommented != null) {
+      this.submitQuestionComment();
+    }
+    if (this.answerIdCommented != null && this.questionIdCommented == null) {
+      this.submitAnswerComment();
     }
   }
 
   submitQuestionComment() {
     let subjectId = this.questionIdCommented.value;
-    let comment = {body: this.comment.value};
+    let comment = { body: this.comment.value };
 
     this.commentService.addQuestionComment(comment, subjectId)
-    .pipe(first())
-    .subscribe(result => {
-      console.log("result: " + JSON.stringify(result));
-      this.ngOnInit();
-      this.modalService.dismissAll();
-    },
-    error => {
-      console.log("result: " + JSON.stringify(error));
-    })
+      .pipe(first())
+      .subscribe(result => {
+        console.log("result: " + JSON.stringify(result));
+        this.ngOnInit();
+        this.modalService.dismissAll();
+      },
+        error => {
+          console.log("result: " + JSON.stringify(error));
+        })
   }
 
   submitAnswerComment() {
     let subjectId = this.answerIdCommented.value;
-    let comment = {body: this.comment.value};
+    let comment = { body: this.comment.value };
 
     this.commentService.addAnswerComment(comment, subjectId)
-    .pipe(first())
-    .subscribe(result => {
-      console.log("result: " + JSON.stringify(result));
-      this.ngOnInit();
-      this.modalService.dismissAll();
-    },
-    error => {
-      console.log("result: " + JSON.stringify(error));
-    })
+      .pipe(first())
+      .subscribe(result => {
+        console.log("result: " + JSON.stringify(result));
+        this.ngOnInit();
+        this.modalService.dismissAll();
+      },
+        error => {
+          console.log("result: " + JSON.stringify(error));
+        })
   }
 
 
   submitAnswer(questionId: any) {
     let questnId = questionId;
-    let answer = {body: this.answer.value};
+    let answer = { body: this.answer.value };
     console.log("Answered entered: " + answer);
     console.log("id: " + questnId);
 
     this.answerService.addAnswer(answer, questnId)
       .pipe(first())
       .subscribe(result => {
-        console.log("result of adding answers: " +JSON.stringify(result))
+        console.log("result of adding answers: " + JSON.stringify(result))
       },
         error => {
-          console.log("errors of adding answers: "+ JSON.stringify(error))
+          console.log("errors of adding answers: " + JSON.stringify(error))
         });
   }
+
+  upVoteQuestion(questionId: any) {
+    this.questionService.upVoteQuestion(questionId)
+      .pipe(first())
+      .subscribe(result => {
+        console.log("result: " + JSON.stringify(result));
+        this.ngOnInit();
+      },
+        error => {
+          console.log("result: " + JSON.stringify(error));
+        })
+
+  }
+
+  downVoteQuestion(questionId: any) {
+    this.questionService.downVoteQuestion(questionId)
+      .pipe(first())
+      .subscribe(result => {
+        console.log("result: " + JSON.stringify(result));
+        this.ngOnInit();
+      },
+        error => {
+          console.log("result: " + JSON.stringify(error));
+        })
+
+  }
+
+
+
+  upVoteAnswer(answerId: any) {
+    this.answerService.upVoteAnswer(answerId)
+      .pipe(first())
+      .subscribe(result => {
+        console.log("result: " + JSON.stringify(result));
+        this.ngOnInit();
+      },
+        error => {
+          console.log("result: " + JSON.stringify(error));
+        })
+
+  }
+
+  downVoteAnswer(answerId: any) {
+    this.answerService.downVoteAnswer(answerId)
+      .pipe(first())
+      .subscribe(result => {
+        console.log("result: " + JSON.stringify(result));
+        this.ngOnInit();
+      },
+        error => {
+          console.log("result: " + JSON.stringify(error));
+        })
+
+  }
+
 }

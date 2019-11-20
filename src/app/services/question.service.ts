@@ -50,4 +50,20 @@ export class QuestionService {
         );
     }
 
+    upVoteQuestion(questionId: any):  Observable<{ token: string }> {
+        return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + "/questions/" + questionId + api.QUESTION.UPVOTE, {}).pipe(
+            map(result => {
+                return result;
+            })
+        );
+    }
+
+    downVoteQuestion(questionId: any):  Observable<{ token: string }> {
+        return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + "/questions/" + questionId + api.QUESTION.DOWNVOTE, {}).pipe(
+            map(result => {
+                return result;
+            })
+        );
+    }
+
 }
