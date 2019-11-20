@@ -16,6 +16,7 @@ WORKDIR /usr/src/ms-frontend
 ENV ENVIRONMENT=production3
 
 ENV API_GATEWAY="http://35.241.22.50"
+# ENV API_GATEWAY="http://api.ea.com"
 # ENV MS_USER="http://user-ms-service.default.svc.cluster.local:8080"
 # ENV MS_QUESTIONS="http://question-ms-service.default.svc.cluster.local:8080"
 # ENV MS_ANSWERS="http://answer-ms-service.default.svc.cluster.local:8080"

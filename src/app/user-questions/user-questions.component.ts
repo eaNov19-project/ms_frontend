@@ -29,17 +29,24 @@ export class UserQuestionsComponent implements OnInit {
     );
   }
   ngOnInit() {
-    this.getQuestions();
+    this.getQuestions(); 
+    // this.addModalRef.onClose.subscribe(() => {
+    //       console.log("add question closed");
+    //       // this.questionService.getQuestionByUser()
+    //       this.getQuestions();
+    //   })
   }
   openEditModal(questionId: String){
     this.editModalRef = this.modalService.open(AddQuestionComponent);
-    this.editModalRef.componentInstance.action = 'Edit';
-    this.editModalRef.componentInstance.questionId = questionId;
-    this.editModalRef.onClose.subscribe(() => {
-        console.log("edit question closed");
-        // this.questionService.getQuestionByUser()
-        this.getQuestions();
-    })
+    if(this.editModalRef){
+      this.editModalRef.componentInstance.action = 'Edit';
+      this.editModalRef.componentInstance.questionId = questionId;
+      // this.editModalRef.onClose.subscribe(() => {
+      //     console.log("edit question closed");
+      //     // this.questionService.getQuestionByUser()
+      //     // this.getQuestions();
+      // })
+    }
     
   }
   // removeQuestion(questionId: String){
@@ -47,10 +54,12 @@ export class UserQuestionsComponent implements OnInit {
   // }
   openAddModal(){
     this.addModalRef = this.modalService.open(AddQuestionComponent);
-    this.addModalRef.onClose.subscribe(() => {
-        console.log("add question closed");
-        // this.questionService.getQuestionByUser()
-        this.getQuestions();
-    })
+    // if(this.addModalRef){
+      // this.addModalRef.onClose.subscribe(() => {
+      //     console.log("add question closed");
+      //     // this.questionService.getQuestionByUser()
+      //     this.getQuestions();
+      // })
+    // }
   }
 }
