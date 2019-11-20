@@ -10,6 +10,11 @@
         </div>
         <p class="mb-2">{{ question.body }}</p>
         <small *ngFor="let comment of question.topComments">{{ comment.body }}<br></small>
+        <span class="font-weight-bold text-success" title="Upvote"><i class="fa fa-thumbs-up"></i>
+        </span> <b class="pl-2 pr-2">{{ question.upvotes }}</b>
+        <span class="font-weight-bold text-danger" title="Downvote">
+         <i class="fa fa-thumbs-down"></i>
+        </span>
       </a>
     </div>
     </div>

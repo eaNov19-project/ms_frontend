@@ -34,6 +34,7 @@ import { AnswerService } from './services/answer.service';
 import { CommentService } from './services/comment.service';
 import { QuestionSearchResultComponent } from './question-search-result/question-search-result.component';
 import { TeamComponent } from './team/team.component';
+import { ErrorComponent } from './error/error.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { TeamComponent } from './team/team.component';
     EditAnswerComponent,
     EditDashboardModalComponent,
     QuestionSearchResultComponent,
-    TeamComponent
+    TeamComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

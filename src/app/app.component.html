@@ -24,24 +24,37 @@
     </ul>
     <form class=" col-6">
       <input
-      [(ngModel)]="q" [ngModelOptions]="{standalone: true}"
+        [(ngModel)]="q"
+        [ngModelOptions]="{ standalone: true }"
         class="form-control mr-sm-2"
         type="text"
         placeholder="Search Questions"
         aria-label="Search"
       />
     </form>
-    <button (click)="searchQuestion()" class="btn btn-secondary my-2 my-sm-0" type="submit">
+    <button
+      (click)="searchQuestion()"
+      class="btn btn-secondary mr-4"
+      type="submit"
+    >
       Search
     </button>
-      <div *ngIf="auth.loggedIn">
-          <span><a class="nav-link" [routerLink]="['dashboard']">Hi {{auth.currentUser?.email}} </a></span>
-          <button class="btn ml-2 ml-2 btn-danger" (click)="logout()">Logout</button>
-      </div>
-      <div *ngIf="!auth.loggedIn">
-          <button class="btn ml-2 ml-2 btn-success" (click)="openLogin()">Login</button>
-          <button class="btn ml-2 ml-2 btn-success" (click)="openRegister()">Register</button>
-      </div>
+    <div *ngIf="auth.loggedIn">
+        <a [routerLink]="['dashboard']"> <button class="btn btn-secondary ml-2 mr-2">
+       Hi, {{ auth.currentUser?.name }}
+      </button></a>
+      <button class="btn ml-2 mr-2 btn-danger" (click)="logout()">
+        Logout
+      </button>
+    </div>
+    <div *ngIf="!auth.loggedIn">
+      <button class="btn ml-2 mr-2 btn-success" (click)="openLogin()">
+        Login
+      </button>
+      <button class="btn ml-2 mr-2 btn-success" (click)="openRegister()">
+        Register
+      </button>
+    </div>
   </div>
 </nav>
 <div class="mt-5 " style="min-height: 700px;">

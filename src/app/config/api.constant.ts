@@ -13,7 +13,8 @@ export let api = {
     },
     QUESTION: {
         LIST: '/questions/',
-        ADD: '/questions',
+        LIST_BY_USER: '/questions/users/',
+        ADD: '/questions/',
         BYID: '/questions/',
         SEARCH: '/search/'
     },

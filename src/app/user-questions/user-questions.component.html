@@ -1,43 +1,43 @@
-<div class="contanier mt-4">
-  <div class="row">
-    <app-sidebar></app-sidebar>
-    <div class="col-8">
-        <div class="pb-4">
-            <button class="btn btn-success" (click)="openAddModal()"> Add Questions</button>
-          <!-- <a href="user/addquestion"><button class="btn btn-success"> Add Questions</button></a> -->
-        </div>
-      <table datatable class="row-border hover table table-bordered">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Question</th>
-            <th>Answers?</th>
-            <th>Edited</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let question of questions;let i = index">
-            <td>{{i + 1}}</td>
-            <td>{{question.title}}</td>
-            <td>{{question.topAnswers?.length > 0 ? 'Yes' : 'No'}}</td>
-            <td>{{question.lastEdited}}</td>
-            <td>
-              <!-- <a [routerLink]="['/','user','editquestion',question.id]"> -->
-              <button class="btn btn-link" (click)="openEditModal(question.id)">
-                <!-- <i class="text-success fas fa-edit"></i> -->
-                <fa name="edit"></fa>
-              </button>&nbsp;&nbsp;
-              <a [routerLink]="['/','user','viewquestion',question.id]">
-                <!-- <i class="text-info fas fa-eye"></i> -->
-                <fa name="eye"></fa>
-              </a>&nbsp;&nbsp;
-              <!-- <i class="text-danger fas fa-times"></i> -->
-              <!-- <a (click)="removeQuestion(question.id)"><fa name="times"></fa></a> -->
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="row pt-5">
+  <app-sidebar></app-sidebar>
+  <div class="col-8">
+    <div class="pb-4">
+      <button class="btn btn-success" (click)="openAddModal()">
+        Add Questions
+      </button>
+      <!-- <a href="user/addquestion"><button class="btn btn-success"> Add Questions</button></a> -->
     </div>
+    <table datatable class="row-border hover table table-bordered">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Question</th>
+          <th>Answers?</th>
+          <th>Edited</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let question of questions; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ question.title }}</td>
+          <td>{{ question.topAnswers?.length > 0 ? "Yes" : "No" }}</td>
+          <td>{{ question.lastEdited }}</td>
+          <td>
+            <!-- <a [routerLink]="['/','user','editquestion',question.id]"> -->
+            <button class="btn btn-link" (click)="openEditModal(question.id)">
+              <!-- <i class="text-success fas fa-edit"></i> -->
+              <fa name="edit"></fa></button
+            >&nbsp;&nbsp;
+            <a [routerLink]="['/', 'user', 'viewquestion', question.id]">
+              <!-- <i class="text-info fas fa-eye"></i> -->
+              <fa name="eye"></fa> </a
+            >&nbsp;&nbsp;
+            <!-- <i class="text-danger fas fa-times"></i> -->
+            <!-- <a (click)="removeQuestion(question.id)"><fa name="times"></fa></a> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
