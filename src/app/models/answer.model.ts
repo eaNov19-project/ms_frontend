@@ -20,7 +20,7 @@ export interface Answer {
     id: string;
     body: string;
     date: Date;
-    upvotes: number;
+    votes: number;
     topComments: Array<CommentAnswer>;
     questionId: string;
     userId: string;

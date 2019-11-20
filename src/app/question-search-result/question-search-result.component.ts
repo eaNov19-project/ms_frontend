@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from '../models/question.model';
 import { QuestionService } from '../services/question.service';
 
@@ -11,13 +12,16 @@ export class QuestionSearchResultComponent implements OnInit {
 
   questions: Array<Question> = [];
   p: any;
+  query: any;
 
-  constructor(private questionService: QuestionService) {
+  constructor(private route: ActivatedRoute, private router: Router, private questionService: QuestionService) {
+    this.route.params.subscribe(params => this.query = params.q);
+
   }
 
   ngOnInit() {
-    this.questionService.getAllQuestions().subscribe(result => {
-      this.questions = result.data.questions;
+    this.questionService.searchQuestion(this.query).subscribe(result => {
+      this.questions = result;
     });
   }
 

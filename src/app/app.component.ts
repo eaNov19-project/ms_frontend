@@ -30,7 +30,9 @@ export class AppComponent {
 
   searchQuestion() {
     if (this.q !== '') {
-      this.router.navigate(['search/' + this.q]);
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['search/' + this.q]);
+      });
     }
   }
 }

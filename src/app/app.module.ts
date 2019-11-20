@@ -72,7 +72,7 @@ import { ErrorComponent } from './error/error.component';
     ReactiveFormsModule,
     FormsModule,
     NgBootstrapFormValidationModule.forRoot(),
-    NgBootstrapFormValidationModule,    
+    NgBootstrapFormValidationModule,
     AngularFontAwesomeModule,
     DataTablesModule,
     NgxPaginationModule,

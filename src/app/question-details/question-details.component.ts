@@ -15,7 +15,8 @@ import { CommentService } from '../services/comment.service';
 })
 
 export class QuestionDetailsComponent implements OnInit {
-  p: any;
+  p: any = 1;
+  p1: any = 1;
   question: Question;
   questionResult: QuestionResult;
   questionId;
@@ -25,14 +26,15 @@ export class QuestionDetailsComponent implements OnInit {
   answer: any;
   questionIdCommented: any;
   answerIdCommented: any;
+  commentPage = false;
+  answerPage = false;
+  message = null;
+  type = null;
+  following: boolean;
 
-
-  constructor(private route: ActivatedRoute,
-              private questionService: QuestionService,
-              private answerService: AnswerService,
-              private commentService: CommentService,
-              private router: Router,
-              private modalService: NgbModal) {
+  constructor(
+    private route: ActivatedRoute, private questionService: QuestionService, private answerService: AnswerService,
+    private commentService: CommentService, private router: Router, private modalService: NgbModal) {
     this.route.params.subscribe(params => this.questionId = params.id);
     this.modalOptions = {
       backdrop: 'static',
@@ -47,11 +49,14 @@ export class QuestionDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.questionService.getQuestionById(this.questionId).subscribe(result => {
-      this.questionResult = result;
-      this.question = this.questionResult.data.question;
-      console.log('question: ' + JSON.stringify(this.question));
-      console.log(this.question.body)
+      this.question = result.data.question;
     });
+    this.following = false;
+    this.questionService.checkfollowing(this.questionId).subscribe(result => {
+    this.following = result.data.following;
+    });
+    this.commentPage = false;
+    this.answerPage = false;
   }
 
   openQuestionComment(content, questionId) {
@@ -64,7 +69,6 @@ export class QuestionDetailsComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     this.questionIdCommented = questionId;
-    console.log("Question Id: " + this.questionIdCommented);
   }
 
   openAnswerComment(content, answerId) {
@@ -77,7 +81,6 @@ export class QuestionDetailsComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     this.answerIdCommented = answerId;
-    console.log('Comment Id: ' + this.answerIdCommented);
   }
 
   private getDismissReason(reason: any): string {
@@ -93,6 +96,7 @@ export class QuestionDetailsComponent implements OnInit {
   submitComment() {
     if (this.answerIdCommented == null && this.questionIdCommented != null) {
       this.submitQuestionComment();
+
     }
     if (this.answerIdCommented != null && this.questionIdCommented == null) {
       this.submitAnswerComment();
@@ -106,13 +110,16 @@ export class QuestionDetailsComponent implements OnInit {
     this.commentService.addQuestionComment(comment, subjectId)
       .pipe(first())
       .subscribe(result => {
-        console.log("result: " + JSON.stringify(result));
         this.ngOnInit();
         this.modalService.dismissAll();
+        this.message = result.message;
+        if (result.success === true) { this.type = 'success'; }
+        if (result.success !== true) { this.type = 'danger'; }
       },
         error => {
-          console.log("result: " + JSON.stringify(error));
-        })
+          this.message = error.message;
+          this.type = 'danger';
+        });
   }
 
   submitAnswerComment() {
@@ -122,29 +129,34 @@ export class QuestionDetailsComponent implements OnInit {
     this.commentService.addAnswerComment(comment, subjectId)
       .pipe(first())
       .subscribe(result => {
-        console.log("result: " + JSON.stringify(result));
         this.ngOnInit();
         this.modalService.dismissAll();
+        this.message = result.message;
+        if (result.success === true) { this.type = 'success'; }
+        if (result.success !== true) { this.type = 'danger'; }
       },
         error => {
-          console.log("result: " + JSON.stringify(error));
-        })
+          this.message = error.message;
+          this.type = 'danger';
+        });
   }
 
 
   submitAnswer(questionId: any) {
     let questnId = questionId;
     let answer = { body: this.answer.value };
-    console.log("Answered entered: " + answer);
-    console.log("id: " + questnId);
 
     this.answerService.addAnswer(answer, questnId)
       .pipe(first())
       .subscribe(result => {
-        console.log("result of adding answers: " + JSON.stringify(result))
+        this.answer = new FormControl('');
+        this.message = result.message;
+        if (result.success === true) { this.type = 'success'; }
+        if (result.success !== true) { this.type = 'danger'; }
       },
         error => {
-          console.log("errors of adding answers: " + JSON.stringify(error))
+          this.message = error.message;
+          this.type = 'danger';
         });
   }
 
@@ -152,12 +164,15 @@ export class QuestionDetailsComponent implements OnInit {
     this.questionService.upVoteQuestion(questionId)
       .pipe(first())
       .subscribe(result => {
-        console.log("result: " + JSON.stringify(result));
-        this.ngOnInit();
+        document.getElementById(questionId).innerHTML++;
+        this.message = result.message;
+        if (result.success === true) { this.type = 'success'; }
+        if (result.success !== true) { this.type = 'danger'; }
       },
         error => {
-          console.log("result: " + JSON.stringify(error));
-        })
+          this.message = error.message;
+          this.type = 'danger';
+        });
 
   }
 
@@ -165,12 +180,15 @@ export class QuestionDetailsComponent implements OnInit {
     this.questionService.downVoteQuestion(questionId)
       .pipe(first())
       .subscribe(result => {
-        console.log("result: " + JSON.stringify(result));
-        this.ngOnInit();
+        document.getElementById(questionId).innerHTML--;
+        this.message = result.message;
+        if (result.success === true) { this.type = 'success'; }
+        if (result.success !== true) { this.type = 'danger'; }
       },
         error => {
-          console.log("result: " + JSON.stringify(error));
-        })
+          this.message = error.message;
+          this.type = 'danger';
+        });
 
   }
 
@@ -179,12 +197,15 @@ export class QuestionDetailsComponent implements OnInit {
     this.answerService.upVoteAnswer(answerId)
       .pipe(first())
       .subscribe(result => {
-        console.log("result: " + JSON.stringify(result));
-        this.ngOnInit();
+        document.getElementById(answerId).innerHTML++;
+        this.message = result.message;
+        if (result.success === true) { this.type = 'success'; }
+        if (result.success !== true) { this.type = 'danger'; }
       },
         error => {
-          console.log("result: " + JSON.stringify(error));
-        })
+          this.message = error.message;
+          this.type = 'danger';
+        });
 
   }
 
@@ -192,23 +213,50 @@ export class QuestionDetailsComponent implements OnInit {
     this.answerService.downVoteAnswer(answerId)
       .pipe(first())
       .subscribe(result => {
-        console.log("result: " + JSON.stringify(result));
-        this.ngOnInit();
+        document.getElementById(answerId).innerHTML--;
+        this.message = result.message;
+        if (result.success === true) { this.type = 'success'; }
+        if (result.success !== true) { this.type = 'danger'; }
       },
         error => {
-          console.log("result: " + JSON.stringify(error));
-        })
+          this.message = error.message;
+          this.type = 'danger';
+        });
 
   }
 
-  startFollowing(){
+  startFollowing() {
     this.questionService.startFollowing(this.questionId).pipe(first())
-    .subscribe(result => {
-      console.log('result: ' + JSON.stringify(result));
-    },
-      error => {
-        console.log('result: ' + JSON.stringify(error));
-      });
+      .subscribe(result => {
+        this.message = result.message;
+        if (result.success === true) { this.type = 'success'; }
+        if (result.success !== true) { this.type = 'danger'; }
+      },
+        error => {
+          this.message = error.message;
+          this.type = 'danger';
+        });
   }
 
+  loadQuestionComments() {
+    this.questionService.getQuestionComments(this.questionId).subscribe(result => {
+      this.question.topComments = result.data.comments;
+      this.commentPage = true;
+    });
+  }
+
+  loadAllAnswers() {
+    this.answerService.getAnswersByQuestionId(this.questionId).subscribe(result => {
+      console.log(result.data.answers);
+      this.question.topAnswers = result.data.answers;
+      this.answerPage = true;
+    });
+  }
+
+  // loadAnswerComments(answerId) {
+  //   this.answerService.getAnswerComments(answerId).subscribe(result => {
+  //     this.question.topComments = result.data.comments;
+  //     this.commentPage2 = true;
+  //   });
+  // }
 }

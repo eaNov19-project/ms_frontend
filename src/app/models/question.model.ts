@@ -20,6 +20,7 @@ export interface QuestionResult {
 export interface Question {
     id: string;
     userId: number;
+    userEmail: string;
     title: string;
     body: string;
     created: Date;
