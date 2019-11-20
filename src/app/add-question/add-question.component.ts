@@ -25,22 +25,36 @@ export class AddQuestionComponent implements OnInit {
         (result) => {
           console.log(result);
           this.questionObj = result.data.question;
+          const currentTitle = this.questionObj != null ? this.questionObj.title : '';
+          const currentBody = this.questionObj != null ? this.questionObj.body : '';
+          this.questionForm = new FormGroup({
+            title: new FormControl(currentTitle, [
+              Validators.required,
+              Validators.maxLength(200)
+            ]),
+            body: new FormControl(currentBody, [
+              Validators.required,
+              Validators.maxLength(500)
+            ])
+          });
         },
         err => console.log(err)
       );
+      }else {
+        this.questionForm = new FormGroup({
+          title: new FormControl('', [
+            Validators.required,
+            Validators.maxLength(200)
+          ]),
+          body: new FormControl('', [
+            Validators.required,
+            Validators.maxLength(500)
+          ])
+        });
+
       }
-    const currentTitle = this.questionObj != null ? this.questionObj.title : '';
-    const currentBody = this.questionObj != null ? this.questionObj.body : '';
-    this.questionForm = new FormGroup({
-      title: new FormControl(currentTitle, [
-        Validators.required,
-        Validators.maxLength(200)
-      ]),
-      body: new FormControl(currentBody, [
-        Validators.required,
-        Validators.maxLength(500)
-      ])
-    });
+    // const currentTitle = this.questionObj != null ? this.questionObj.title : '';
+    // const currentBody = this.questionObj != null ? this.questionObj.body : '';
   }
 
   OnSubmitForm() {

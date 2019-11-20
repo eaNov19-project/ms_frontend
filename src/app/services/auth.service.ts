@@ -19,6 +19,9 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<boolean> {
+    // console.log('API_GATEWAY = ' + environment.baseUrl.API_GATEWAY );
+    // console.dir(environment);
+    // console.dir(api);
     return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.AUTH.LOGIN, {email, password})
       .pipe(
         map((result: any) => {

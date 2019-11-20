@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Question } from '../models/question.model';
+import { QuestionService } from '../services/question.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-question',
@@ -6,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-question.component.css']
 })
 export class ViewQuestionComponent implements OnInit {
-
-  constructor() { }
+  question: Question;
+  @Input() questionId: String;
+  // questionId: String;
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit() {
+    this.questionService.getQuestionById(this.questionId)
+      .pipe(first())
+      .subscribe(
+        (result) => {
+          console.log(result);
+          this.question = result.data.question;
+          });
   }
 
 }

@@ -22,6 +22,13 @@ export class QuestionService {
             })
         );
     }
+    getQuestionsByUser(userId): Observable<any> {
+        return this.http.get(environment.baseUrl.API_GATEWAY + api.QUESTION.LIST_BY_USER + userId).pipe(
+            map(result => {
+                return result;
+            })
+        );
+    }
 
     getQuestionById(id: any): Observable<any> {
         return this.http.get(environment.baseUrl.API_GATEWAY + api.QUESTION.BYID + id).pipe(
