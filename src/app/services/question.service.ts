@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { api } from '../config/api.constant';
 import { environment } from 'src/environments/environment';
-import { Token } from '@angular/compiler/src/ml_parser/lexer';
 
 @Injectable({
     providedIn: 'root'
@@ -64,6 +63,10 @@ export class QuestionService {
                 return result;
             })
         );
+    }
+
+    startFollowing(qid: any): Observable<{ token: string }> {
+        return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.QUESTION.FOLLOW + qid + '/follow', null);
     }
 
 }

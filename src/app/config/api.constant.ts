@@ -18,7 +18,8 @@ export let api = {
         BYID: '/questions/',
         SEARCH: '/search/',
         UPVOTE: '/upvote',
-        DOWNVOTE: '/downvote'
+        DOWNVOTE: '/downvote',
+        FOLLOW: '/questions/'
     },
     ANSWER: {
         LISTBYQID: '/answers',

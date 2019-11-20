@@ -28,28 +28,28 @@ export class QuestionDetailsComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute,
-    private questionService: QuestionService,
-    private answerService: AnswerService,
-    private commentService: CommentService,
-    private router: Router,
-    private modalService: NgbModal) {
+              private questionService: QuestionService,
+              private answerService: AnswerService,
+              private commentService: CommentService,
+              private router: Router,
+              private modalService: NgbModal) {
     this.route.params.subscribe(params => this.questionId = params.id);
     this.modalOptions = {
       backdrop: 'static',
       backdropClass: 'customBackdrop',
       centered: true,
-      size: "lg"
+      size: 'lg'
     };
 
-    this.comment = new FormControl("");
-    this.answer = new FormControl("");
+    this.comment = new FormControl('');
+    this.answer = new FormControl('');
   }
 
   ngOnInit() {
     this.questionService.getQuestionById(this.questionId).subscribe(result => {
       this.questionResult = result;
       this.question = this.questionResult.data.question;
-      console.log("question: " + JSON.stringify(this.question));
+      console.log('question: ' + JSON.stringify(this.question));
       console.log(this.question.body)
     });
   }
@@ -77,7 +77,7 @@ export class QuestionDetailsComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     this.answerIdCommented = answerId;
-    console.log("Comment Id: " + this.answerIdCommented);
+    console.log('Comment Id: ' + this.answerIdCommented);
   }
 
   private getDismissReason(reason: any): string {
@@ -175,7 +175,6 @@ export class QuestionDetailsComponent implements OnInit {
   }
 
 
-
   upVoteAnswer(answerId: any) {
     this.answerService.upVoteAnswer(answerId)
       .pipe(first())
@@ -203,7 +202,13 @@ export class QuestionDetailsComponent implements OnInit {
   }
 
   startFollowing(){
-    
+    this.questionService.startFollowing(this.questionId).pipe(first())
+    .subscribe(result => {
+      console.log('result: ' + JSON.stringify(result));
+    },
+      error => {
+        console.log('result: ' + JSON.stringify(error));
+      });
   }
 
 }
