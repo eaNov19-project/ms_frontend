@@ -28,25 +28,28 @@
               {{question?.body}}
             </p>
             <p>
-              <button class="float-right btn btn-outline-primary ml-2" (click)="open(mymodal)">
+              <button class="float-right btn btn-outline-primary ml-2" (click)="openQuestionComment(mymodal, question?.id)">
                 <a> <i class="fa fa-reply"></i> Comment</a>
               </button>
             </p>
           </div>
 
           <div class="clearfix"></div>
-          <div *ngFor="let comment of question?.topComments | paginate: { itemsPerPage: 10, currentPage: p }">
+          <div *ngFor="let comment of question?.topComments">
             <hr>
-            <p> <small>{{comment?.body}}</small> </p>
+            <p> 
+              <small>{{comment?.body}}</small>
+              <small class="float-right"> {{question?.created | date: 'dd-MMM-yyyy  h:mm a'}}</small>
+             </p>
             <hr>
           </div>
         </div>
         <p>&nbsp;</p>
       </div>
-      <h4><strong>Answer(s)</strong></h4>
+      <h4><strong>{{question?.topComments.length}} &nbsp; Answer(s)</strong></h4>
       <hr>
       <div class="card card-inner"
-        *ngFor="let answer of question?.topAnswers | paginate: { itemsPerPage: 10, currentPage: p }">
+        *ngFor="let answer of question?.topComments">
         <div class="card-body" *ngIf="answer != null">
           <div class="row">
             <div class="col-md-12">
@@ -66,19 +69,23 @@
                 <div class="clearfix"></div>
                 <p>
                   {{answer?.created | date: 'dd-MMM-yyyy  h:mm a'}}
+                  
                 </p>
                 <p>
                   {{answer?.body}}
+                  
                   <p>
-                    <button class="float-right btn btn-outline-primary ml-2" (click)="open(mymodal)">
+                    <button  class="float-right btn btn-outline-primary ml-2" (click)="openAnswerComment(mymodal, answer?.id)">
                       <a> <i class="fa fa-reply"></i> Comment</a>
                     </button>
                   </p>
               </div>
               <div class="clearfix"></div>
-              <div *ngFor="let comment of question?.topComments | paginate: { itemsPerPage: 10, currentPage: p }">
+              <div *ngFor="let comment of question?.topComments">
                 <hr>
-                <p> <small>{{answer?.body}}</small> </p>
+                <p> <small>{{answer?.body}}</small> 
+                  <small class="float-right"> {{question?.created | date: 'dd-MMM-yyyy  h:mm a'}}</small>
+                </p>
                 <hr>
               </div>
             </div>

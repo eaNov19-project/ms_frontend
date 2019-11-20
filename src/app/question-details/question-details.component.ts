@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Question, QuestionResult } from '../models/question.model';
 import { QuestionService } from '../services/question.service';
 import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl } from '@angular/forms';
 import { AnswerService } from '../services/answer.service';
 import { first } from 'rxjs/operators';
-import { resource } from 'selenium-webdriver/http';
+import { CommentService } from '../services/comment.service';
 
 @Component({
   selector: 'app-question-details',
@@ -23,11 +23,15 @@ export class QuestionDetailsComponent implements OnInit {
   modalOptions: NgbModalOptions;
   comment: any;
   answer: any;
+  questionIdCommented:any;
+  answerIdCommented:any;
 
 
   constructor(private route: ActivatedRoute,
     private questionService: QuestionService,
     private answerService: AnswerService,
+    private commentService: CommentService,
+    private router: Router,
     private modalService: NgbModal) {
     this.route.params.subscribe(params => this.questionId = params.id);
     this.modalOptions = {
@@ -50,14 +54,31 @@ export class QuestionDetailsComponent implements OnInit {
     });
   }
 
-  open(content) {
+  openQuestionComment(content, questionId) {
+    this.answerIdCommented = null;
+    this.questionIdCommented = null;
     this.modalService.open(content, this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+     
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+    this.questionIdCommented = questionId;
+    console.log("Question Id: " +  this.questionIdCommented );
   }
 
+  openAnswerComment(content, answerId) {
+    this.questionIdCommented = null;
+    this.answerIdCommented = null;
+    this.modalService.open(content, this.modalOptions).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+     
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+    this.answerIdCommented = answerId;
+    console.log("Comment Id: " + this.answerIdCommented);
+  }
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -70,9 +91,46 @@ export class QuestionDetailsComponent implements OnInit {
   }
 
   submitComment() {
-    let comment = this.comment.value;
-    console.log("Comment entered: " + comment);
+    if(this.answerIdCommented == null && this.questionIdCommented != null) {
+        this.submitQuestionComment();
+    } 
+    if(this.answerIdCommented != null && this.questionIdCommented == null) {
+        this.submitAnswerComment();
+    }
   }
+
+  submitQuestionComment() {
+    let subjectId = this.questionIdCommented.value;
+    let comment = {body: this.comment.value};
+
+    this.commentService.addQuestionComment(comment, subjectId)
+    .pipe(first())
+    .subscribe(result => {
+      console.log("result: " + JSON.stringify(result));
+      this.ngOnInit();
+      this.modalService.dismissAll();
+    },
+    error => {
+      console.log("result: " + JSON.stringify(error));
+    })
+  }
+
+  submitAnswerComment() {
+    let subjectId = this.answerIdCommented.value;
+    let comment = {body: this.comment.value};
+
+    this.commentService.addAnswerComment(comment, subjectId)
+    .pipe(first())
+    .subscribe(result => {
+      console.log("result: " + JSON.stringify(result));
+      this.ngOnInit();
+      this.modalService.dismissAll();
+    },
+    error => {
+      console.log("result: " + JSON.stringify(error));
+    })
+  }
+
 
   submitAnswer(questionId: any) {
     let questnId = questionId;
@@ -83,11 +141,10 @@ export class QuestionDetailsComponent implements OnInit {
     this.answerService.addAnswer(answer, questnId)
       .pipe(first())
       .subscribe(result => {
-        console.log("result of adding answers: " +result)
+        console.log("result of adding answers: " +JSON.stringify(result))
       },
         error => {
           console.log("errors of adding answers: "+ JSON.stringify(error))
         });
   }
-
 }

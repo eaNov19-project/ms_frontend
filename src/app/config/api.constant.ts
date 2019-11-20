@@ -26,6 +26,8 @@ export let api = {
     },
     COMMENT: {
         LISTBYQID: '/comments/questions/',
-        LISTBYAID: 'comments/answers/',
+        LISTBYAID: '/comments/answers/',
+        QUESTIONADD: '/comments/questions/',
+        ANSWERADD: '/comments/answers/'
     },
   };

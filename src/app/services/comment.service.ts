@@ -30,4 +30,11 @@ export class CommentService {
         );
     }
 
+    addQuestionComment(questionCommentObj: object, subjectId:any): Observable<{ token: string }> {
+        return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.COMMENT.QUESTIONADD + subjectId, questionCommentObj);
+    }
+    addAnswerComment(answerCommentObj: object, subjectId:any): Observable<{ token: string }> {
+        return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.COMMENT.ANSWERADD + subjectId, answerCommentObj);
+    }
+
 }
