@@ -37,36 +37,49 @@ export class QuestionService {
         );
     }
 
+    getQuestionComments(id: any): Observable<any> {
+        return this.http.get(environment.baseUrl.API_GATEWAY + api.QUESTION.QUESTION_COMMENTS + id).pipe(
+            map(result => {
+                return result;
+            })
+        );
+    }
+
     addQuestion(questionObj: object): Observable<{ token: string }> {
         return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.QUESTION.ADD, questionObj);
     }
 
     searchQuestion(query: any): Observable<any> {
-        return this.http.get(environment.baseUrl.API_GATEWAY + api.QUESTION.SEARCH + query).pipe(
+        return this.http.get(environment.baseUrl.API_GATEWAY + api.QUESTION.ELASTIC_SEARCH + query).pipe(
             map(result => {
                 return result;
             })
         );
     }
 
-    upVoteQuestion(questionId: any):  Observable<{ token: string }> {
-        return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + "/questions/" + questionId + api.QUESTION.UPVOTE, {}).pipe(
-            map(result => {
-                return result;
-            })
-        );
+    upVoteQuestion(questionId: any): Observable<{ token: string }> {
+        return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + '/questions/' + questionId + api.QUESTION.UPVOTE, {})
+            .pipe(
+                map(result => {
+                    return result;
+                })
+            );
     }
 
-    downVoteQuestion(questionId: any):  Observable<{ token: string }> {
-        return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + "/questions/" + questionId + api.QUESTION.DOWNVOTE, {}).pipe(
-            map(result => {
-                return result;
-            })
-        );
+    downVoteQuestion(questionId: any): Observable<{ token: string }> {
+        return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + '/questions/' + questionId + api.QUESTION.DOWNVOTE, {})
+            .pipe(
+                map(result => {
+                    return result;
+                })
+            );
     }
 
     startFollowing(qid: any): Observable<{ token: string }> {
         return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.QUESTION.FOLLOW + qid + '/follow', null);
     }
 
+    checkfollowing(qid: any): Observable<{ token: string }> {
+        return this.http.get<{ token: string }>(environment.baseUrl.API_GATEWAY + api.QUESTION.FOLLOW + qid + '/checkfollowing');
+    }
 }

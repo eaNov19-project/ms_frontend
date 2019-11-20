@@ -19,7 +19,9 @@ export let api = {
         SEARCH: '/search/',
         UPVOTE: '/upvote',
         DOWNVOTE: '/downvote',
-        FOLLOW: '/questions/'
+        FOLLOW: '/questions/',
+        QUESTION_COMMENTS: '/comments/questions/',
+        ELASTIC_SEARCH: '/elastic-search/search/'
     },
     ANSWER: {
         LISTBYQID: '/answers',
@@ -27,7 +29,8 @@ export let api = {
         BYID: '/answers/',
         UPVOTE: '/upvote',
         DOWNVOTE: '/donwvote',
-        ADD: '/answers/'
+        ADD: '/answers/',
+        ANSWER_COMMENTS: '/comments/answers/'
     },
     COMMENT: {
         LISTBYQID: '/comments/questions/',

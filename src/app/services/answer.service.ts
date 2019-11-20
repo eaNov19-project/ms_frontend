@@ -37,10 +37,10 @@ export class AnswerService {
         );
     }
 
-    addAnswer(answerObj: object, QID:any): Observable<{ token: string }> {
+    addAnswer(answerObj: object, QID: any): Observable<{ token: string }> {
         return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.ANSWER.ADD + QID, answerObj);
     }
-    upVoteAnswer(answerId: any):  Observable<{ token: string }> {
+    upVoteAnswer(answerId: any): Observable<{ token: string }> {
         return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + "/answers/" + answerId + api.ANSWER.UPVOTE, {}).pipe(
             map(result => {
                 return result;
@@ -48,8 +48,16 @@ export class AnswerService {
         );
     }
 
-    downVoteAnswer(answerId: any):  Observable<{ token: string }> {
+    downVoteAnswer(answerId: any): Observable<{ token: string }> {
         return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + "/answers/" + answerId + api.ANSWER.DOWNVOTE, {}).pipe(
+            map(result => {
+                return result;
+            })
+        );
+    }
+
+    getAnswerComments(id: any) {
+        return this.http.get(environment.baseUrl.API_GATEWAY + api.ANSWER.ANSWER_COMMENTS + id).pipe(
             map(result => {
                 return result;
             })
