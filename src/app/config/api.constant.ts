@@ -16,7 +16,8 @@ export let api = {
         LIST_BY_USER: '/questions/users/',
         ADD: '/questions/',
         BYID: '/questions/',
-        SEARCH: '/search/'
+        SEARCH: '/search/',
+        FOLLOW: '/questions/'
     },
     ANSWER: {
         LISTBYQID: '/answers',

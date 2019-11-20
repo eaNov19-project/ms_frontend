@@ -50,4 +50,8 @@ export class QuestionService {
         );
     }
 
+    startFollowing(qid: any): Observable<{ token: string }> {
+        return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.QUESTION.FOLLOW + qid + '/follow', null);
+    }
+
 }
