@@ -15,6 +15,7 @@ import { EditAnswerComponent } from './edit-answer/edit-answer.component';
 import { EditDashboardModalComponent } from './dashboard/edit-dashboard-modal.component';
 import { TeamComponent } from './team/team.component';
 import { QuestionSearchResultComponent } from './question-search-result/question-search-result.component';
+import { ErrorComponent } from './error/error.component';
 
 
 const routes: Routes = [
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'user/answers', component: UserAnswersComponent },
   { path: 'user/editanswer/:id', component: EditAnswerComponent },
   { path: 'team', component: TeamComponent},
-  { path: 'search/:q', component: QuestionSearchResultComponent }
+  { path: 'search/:q', component: QuestionSearchResultComponent },
+  { path: '**', component: ErrorComponent }
 ];
 
 @NgModule({

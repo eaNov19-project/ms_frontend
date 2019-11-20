@@ -23,6 +23,7 @@ export class QuestionDetailsComponent implements OnInit {
   modalOptions: NgbModalOptions;
   comment: any;
   answer: any;
+  p: any;
 
 
   constructor(private route: ActivatedRoute,
