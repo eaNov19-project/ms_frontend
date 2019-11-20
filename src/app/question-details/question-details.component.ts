@@ -15,7 +15,7 @@ import { CommentService } from '../services/comment.service';
 })
 
 export class QuestionDetailsComponent implements OnInit {
-
+  p: any;
   question: Question;
   questionResult: QuestionResult;
   questionId;
