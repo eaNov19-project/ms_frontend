@@ -1,3 +1,215 @@
+
+
+
+<div class="container pt-5">
+    <div class="row">
+      <div class="col-10">
+    <h4 class="text-left">{{ question?.title }} </h4>
+  </div>
+  <span class="col-2 text-right">
+  <span style="cursor: pointer;" (click)="startFollowing()" class="badge badge-primary">Follow</span>
+  </span>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12" style="min-width: 100!important;">
+            <div>
+              <p>
+                <a
+                  class="float-left"
+                  href="https://maniruzzaman-akash.blogspot.com/p/contact.html"
+                  ><strong>Maniruzzaman Akash</strong></a
+                >&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; {{ question?.created | date: "dd-MMM-yyyy  h:mm a" }}
+
+                <small class="float-right" >
+                    <span class="font-weight-bold text-success" style="cursor: pointer;" title="Upvote" (click)="upVoteQuestion(question?.id)"> <i class="fa fa-thumbs-up"></i>
+                    </span> &nbsp; {{question?.upvotes}} &nbsp;
+                    <span class="font-weight-bold text-danger" style="cursor: pointer;" title="Downvote" (click)="downVoteQuestion(question?.id)">
+                      <i class="fa fa-thumbs-down"></i>
+                    </span>
+                  </small>
+
+              </p>
+              <div class="clearfix"></div>
+              <p>
+                {{ question?.body }}
+              </p>
+              <p>
+                <span
+                  style="cursor: pointer;"
+                  class="float-right badge badge-info ml-2"
+                  (click)="openQuestionComment(mymodal, question?.id)"
+                >
+                  <i class="fa fa-reply"></i> Comment
+                </span>
+              </p>
+            </div>
+  
+            <div class="clearfix"></div>
+            <hr />
+            <div *ngFor="let comment of question?.topComments">
+              <div class="row">
+                <small class="col-9">{{ comment?.body }}</small>
+                <small class="col-3 text-right float-right">
+                  {{ question?.created | date: "dd-MMM-yyyy  h:mm a" }}</small
+                >
+              </div>
+            </div>
+          </div>
+          <p>&nbsp;</p>
+        </div>
+        <h5>
+          {{ question?.topComments.length }} Answer(s)
+        </h5>
+        <hr />
+        <div
+          class="card card-inner"
+          *ngFor="
+            let answer of question?.topComments
+              | paginate: { itemsPerPage: 5, currentPage: p }
+          "
+        >
+          <div class="card-body" *ngIf="answer != null">
+            <div class="row">
+              <div class="col-md-12">
+                <div>
+                  <p>
+                    <a
+                      href="https://maniruzzaman-akash.blogspot.com/p/contact.html"
+                      ><strong>Maniruzzaman Akash</strong></a
+                    >
+                    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;{{ answer?.created | date: "dd-MMM-yyyy  h:mm a" }}
+
+                    <small class="float-right">
+                        <span class="font-weight-bold text-success" title="Upvote" style="cursor: pointer;" (click)="upVoteAnswer(answer?.id)"> <i class="fa fa-thumbs-up"></i>
+                        </span> &nbsp; {{answer?.upvotes}} &nbsp;
+                        <span class="font-weight-bold text-danger" title="Downvote" style="cursor: pointer;" (click)="downVoteAnswer(answer?.id)">
+                          <i class="fa fa-thumbs-down"></i>
+                        </span>
+                      </small>
+                  </p>
+  
+                  <div>
+                    {{ answer?.body }}
+                  </div>
+  
+                  <p>
+                    <span
+                      style="cursor: pointer;"
+                      class="float-right badge badge-info ml-2"
+                      (click)="openAnswerComment(mymodal, answer?.id)"
+                    >
+                      <i class="fa fa-reply"></i> Comment
+                    </span>
+                  </p>
+                </div>
+                <div class="clearfix"></div>
+                <hr />
+                <div *ngFor="let comment of question?.topComments">
+                  <div class="row">
+                      <small class="col-9">{{ answer?.body }}</small>
+                    <small class="float-right col-3 text-right">
+                      {{ question?.created | date: "dd-MMM-yyyy  h:mm a" }}</small
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="answer == null || answer == undefined">
+            <h4>No answers yet</h4>
+          </div>
+        </div>
+  
+        <div class="float-right p-2">
+          <nav aria-label="Page navigation example float-right">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </nav>
+        </div>
+      </div>
+  
+      <div class="p-3">
+        <h3>Your Answer</h3>
+        <div class="form-group">
+          <textarea
+            rows="6"
+            [formControl]="answer"
+            class="form-control"
+          ></textarea>
+        </div>
+        <button class="btn btn-info" (click)="submitAnswer(question?.id)">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div>
+    <ng-template #mymodal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ question?.title }}</h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3>Your Comment</h3>
+        <div class="form-group">
+          <textarea
+            rows="8"
+            [formControl]="comment"
+            class="form-control"
+          ></textarea>
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: space-between!important;">
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="modal.close('Save click')"
+        >
+          Cancel
+        </button>
+        <button class="btn btn-info" (click)="submitComment()">Submit</button>
+      </div>
+    </ng-template>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 <div class="container pt-5">
   <h2 class="text-left">{{question?.title}}</h2>
 
@@ -143,4 +355,4 @@
       <button class="btn btn-info" (click)="submitComment()">Submit</button>
     </div>
   </ng-template>
-</div>
+</div> -->

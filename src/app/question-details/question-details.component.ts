@@ -202,4 +202,8 @@ export class QuestionDetailsComponent implements OnInit {
 
   }
 
+  startFollowing(){
+    
+  }
+
 }
