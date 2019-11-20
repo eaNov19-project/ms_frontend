@@ -15,8 +15,14 @@ spec:
         app: frontend-ms
     spec:
       containers:
-        - name: frontend-ms
-          image:  islamahmad/eaproj-frontend-ms:1.0.6
-          envFrom:
-            - configMapRef:
-                name: frontend-ms
+      - name: frontend-ms
+        image:  islamahmad/eaproj-frontend-ms:1.1.0
+        imagePullPolicy: Always
+        # env:
+        # - name: API_GATEWAY
+        #   value: "35.241.22.50"
+        # - name: TEST_VAR
+        #   value: "test"
+        envFrom:
+          - configMapRef:
+              name: frontend-ms

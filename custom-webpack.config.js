@@ -1,5 +1,6 @@
 const webpack = require('webpack');
-
+// console.log('process.env.API_GATEWAY = '+process.env.API_GATEWAY);
+// console.dir(process.env);
 module.exports = {
   plugins: [
     new webpack.DefinePlugin({
