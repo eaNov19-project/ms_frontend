@@ -23,6 +23,7 @@ export let api = {
     },
     ANSWER: {
         LISTBYQID: '/answers',
+        LIST_BY_USER: '/answers/users/',
         BYID: '/answers/',
         UPVOTE: '/upvote',
         DOWNVOTE: '/donwvote',

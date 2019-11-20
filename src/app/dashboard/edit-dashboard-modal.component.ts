@@ -34,18 +34,18 @@ export class EditDashboardModalComponent implements OnInit {
             });
             this.activeModal.close('success');
           } else {
-            this.error = 'Could not save user info';
-            this.activeModal.dismiss('error');
+            this.error = result['message'];
+            // this.activeModal.dismiss('error');
           }
         },
-        err => this.error = 'something went wrong'
+        err => this.error = err.error.message
       );
     
   }
   ngOnInit() {
     
     this.userForm = new FormGroup({
-      name: new FormControl('', [
+      name: new FormControl(this.auth.currentUser.name, [
         Validators.required,
         Validators.minLength(3)
       ]),
@@ -54,7 +54,7 @@ export class EditDashboardModalComponent implements OnInit {
       //   Validators.required,
       //   Validators.pattern(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
       // ]),
-      phone: new FormControl('', [
+      phone: new FormControl(this.auth.currentUser.phone, [
         Validators.required,
         Validators.minLength(10),
         Validators.pattern(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/)

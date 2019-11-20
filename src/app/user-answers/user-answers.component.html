@@ -5,19 +5,27 @@
             <table datatable class="row-border hover table table-bordered">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>#</th>
                   <th>Answer</th>
+                  <th>Upvotes</th>
+                  <th>Status</th>
+                  <th>Edited</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Foo</td>
-                  <td><a href="user/editanswer/1"><i class="text-success fa fa-edit"></i></a>&nbsp;&nbsp;
-                    <a href="questionDetails/1"><i class="text-info fa fa-eye"></i></a>&nbsp;&nbsp;
-                    <i class="text-danger fa fa-times"></i></td>
-                </tr>
+                  <tr *ngFor="let answer of answers; let i = index" >
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ answer.body }}</td>
+                      <td>{{ answer.upvotes }}</td>
+                      <td *ngIf="answer.active == 0">Banned <fa name="ban"></fa></td>
+                      <td *ngIf="answer.active == 1">Posted</td>
+            
+                      <td>
+                        <a [routerLink]="['/', 'questionDetails', answer.questionId]" *ngIf="answer.active != 0">
+                          <fa name="eye"></fa> </a
+                        >&nbsp;&nbsp;</td>
+                    </tr>
               </tbody>
             </table>
           </div>

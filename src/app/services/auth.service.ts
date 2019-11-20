@@ -27,9 +27,9 @@ export class AuthService {
         map((result: any) => {
           if (result.success) {
             tokenSetter(result.data.token);
-            return true;
+            return result;
           } else {
-            return false;
+            return result;
           }
         })
       );
@@ -38,8 +38,12 @@ export class AuthService {
   signup(userObj: object): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.USER.REGISTER_V2, userObj)
       // .pipe(
-      //   map(result => {
-      //     return result;
+      //   map((result:any) => {
+      //     console.log(result);
+      //     if(result.sucess) {
+      //       return result;
+      //     }
+      //     return result.error;
       //   })
       // );
   }

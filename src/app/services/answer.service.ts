@@ -15,7 +15,14 @@ export class AnswerService {
     }
 
     getAnswersByQuestionId(Qid: any): Observable<any> {
-        return this.http.get(environment.baseUrl.MS_ANSWERS + api.ANSWER.LISTBYQID + Qid).pipe(
+        return this.http.get(environment.baseUrl.API_GATEWAY + api.ANSWER.LISTBYQID + Qid).pipe(
+            map(result => {
+                return result;
+            })
+        );
+    }
+    getAnswersByUser(userId: any): Observable<any> {
+        return this.http.get(environment.baseUrl.API_GATEWAY + api.ANSWER.LIST_BY_USER + userId).pipe(
             map(result => {
                 return result;
             })
@@ -23,7 +30,7 @@ export class AnswerService {
     }
 
     getAnswerById(id: any): Observable<any> {
-        return this.http.get(environment.baseUrl.MS_ANSWERS + api.ANSWER.BYID + id).pipe(
+        return this.http.get(environment.baseUrl.API_GATEWAY + api.ANSWER.BYID + id).pipe(
             map(result => {
                 return result;
             })

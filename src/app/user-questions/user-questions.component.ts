@@ -53,13 +53,20 @@ export class UserQuestionsComponent implements OnInit {
     // this.questionService.removeQuestion(); // not implemented API yet
   // }
   openAddModal(){
-    this.addModalRef = this.modalService.open(AddQuestionComponent);
-    // if(this.addModalRef){
-      // this.addModalRef.onClose.subscribe(() => {
-      //     console.log("add question closed");
-      //     // this.questionService.getQuestionByUser()
-      //     this.getQuestions();
-      // })
+     const addModalRef = this.modalService.open(AddQuestionComponent);
+    // if(this.addModalRef && this.addModalRef.onClose){
+    //   this.addModalRef.onClose.subscribe(() => {
+    //       console.log("add question closed");
+    //       // this.questionService.getQuestionByUser()
+    //       this.getQuestions();
+    //   })
     // }
+    
+    addModalRef.result.then((data) => {
+      // on close
+      this.getQuestions();
+    }, (reason) => {
+      // on dismiss
+    });
   }
 }

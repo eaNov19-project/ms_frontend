@@ -30,15 +30,18 @@ export class RegisterComponent implements OnInit {
           console.log(result);
           if (result['success']) {
             // this.router.navigate(['/']);
-            console.log('success signup');
+            // console.log('success signup');
             this.activeModal.close('success signup');
           } else {
-            this.error = 'Could not sign up';
-            console.log(result['message']);
-            this.activeModal.dismiss(this.error);
+            this.error = result['message'];
+            // console.log(result['message']);
+            // this.activeModal.dismiss(this.error);
           }
         },
-        err => this.error = 'Could not authenticate'
+        err => {
+          console.log(err);
+          this.error = err.error.message;
+        }
       );
     
   }

@@ -31,9 +31,9 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.signinForm.value.email, this.signinForm.value.password)
       .pipe(first())
       .subscribe(
-        (success) => {
-          console.log(success);
-          if (success) {
+        (result) => {
+          // console.log(result);
+          if (result['success']) {
             this.userService.getUserByEmail(this.signinForm.value.email).subscribe(result => {
               console.log(result);
             });
@@ -41,16 +41,22 @@ export class LoginComponent implements OnInit {
             //     console.log(result);
             //   });
             // this.router.navigate(['/']);
-            console.log('login success');
+            // console.log('login success');
             this.activeModal.close('login success');
           } else {
-            this.error = 'Could not sign in';
-            this.activeModal.dismiss(this.error);
+          this.error = result['message'];
+          // this.error = 'Could not sign in';
+          // this.activeModal.dismiss(this.error);
           }
         },
         err => this.error = 'Could not authenticate'
       );
   }
+  
+  get emailControl() {
+    return this.signinForm.get('email') as FormControl;
+  }
+
   ngOnInit() {
     
     this.signinForm = new FormGroup({

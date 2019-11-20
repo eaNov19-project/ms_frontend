@@ -11,13 +11,31 @@ import { Question } from '../models/question.model';
   styleUrls: ['../login/login.component.css']
 })
 export class AddQuestionComponent implements OnInit {
-  @Input() action: String;
+  @Input() action: String = 'Add';
   @Input() questionId: String;
   public questionForm: FormGroup;
   private questionObj: Question;
   constructor(public activeModal: NgbActiveModal, private questionService: QuestionService) { }
 
+  get titleControl() {
+    return this.questionForm.get('title') as FormControl;
+  }
+  get bodyControl() {
+    return this.questionForm.get('body') as FormControl;
+  }
+
   ngOnInit() {
+    
+    this.questionForm = new FormGroup({
+      title: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(200)
+      ]),
+      body: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(500)
+      ])
+    });
     if(this.action === 'Edit') {
       this.questionService.getQuestionById(this.questionId)
       .pipe(first())
@@ -27,30 +45,32 @@ export class AddQuestionComponent implements OnInit {
           this.questionObj = result.data.question;
           const currentTitle = this.questionObj != null ? this.questionObj.title : '';
           const currentBody = this.questionObj != null ? this.questionObj.body : '';
-          this.questionForm = new FormGroup({
-            title: new FormControl(currentTitle, [
-              Validators.required,
-              Validators.maxLength(200)
-            ]),
-            body: new FormControl(currentBody, [
-              Validators.required,
-              Validators.maxLength(500)
-            ])
-          });
+          this.titleControl.setValue(currentTitle);
+          this.bodyControl.setValue(currentBody);
+          // this.questionForm = new FormGroup({
+          //   title: new FormControl(currentTitle, [
+          //     Validators.required,
+          //     Validators.maxLength(200)
+          //   ]),
+          //   body: new FormControl(currentBody, [
+          //     Validators.required,
+          //     Validators.maxLength(500)
+          //   ])
+          // });
         },
         err => console.log(err)
       );
       }else {
-        this.questionForm = new FormGroup({
-          title: new FormControl('', [
-            Validators.required,
-            Validators.maxLength(200)
-          ]),
-          body: new FormControl('', [
-            Validators.required,
-            Validators.maxLength(500)
-          ])
-        });
+        // this.questionForm = new FormGroup({
+        //   title: new FormControl('', [
+        //     Validators.required,
+        //     Validators.maxLength(200)
+        //   ]),
+        //   body: new FormControl('', [
+        //     Validators.required,
+        //     Validators.maxLength(500)
+        //   ])
+        // });
 
       }
     // const currentTitle = this.questionObj != null ? this.questionObj.title : '';
