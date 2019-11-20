@@ -7,7 +7,7 @@
                 <tr>
                   <th>#</th>
                   <th>Answer</th>
-                  <th>Upvotes</th>
+                  <th>Votes</th>
                   <th>Status</th>
                   <th>Edited</th>
                   <th>Action</th>
@@ -17,10 +17,11 @@
                   <tr *ngFor="let answer of answers; let i = index" >
                       <td>{{ i + 1 }}</td>
                       <td>{{ answer.body }}</td>
-                      <td>{{ answer.upvotes }}</td>
+                      <td>{{ answer.votes }}</td>
                       <td *ngIf="answer.active == 0">Banned <fa name="ban"></fa></td>
                       <td *ngIf="answer.active == 1">Posted</td>
             
+                      <td>{{ answer.created }}</td>
                       <td>
                         <a [routerLink]="['/', 'questionDetails', answer.questionId]" *ngIf="answer.active != 0">
                           <fa name="eye"></fa> </a

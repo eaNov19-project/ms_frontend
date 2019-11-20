@@ -19,8 +19,8 @@ export interface AnswerResult {
 export interface Answer {
     id: string;
     body: string;
-    date: Date;
-    upvotes: number;
+    created: Date;
+    votes: number;
     topComments: Array<CommentAnswer>;
     questionId: string;
     userId: string;

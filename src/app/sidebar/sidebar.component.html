@@ -4,20 +4,20 @@
     <div class="sidebar-sticky">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="/dashboard">
+          <a class="nav-link active" [routerLink]="['/','dashboard']">
             <fa name="tachometer"></fa>
             Dashboard
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="user/questions">
+          <a class="nav-link" [routerLink]="['/','user', 'questions']">
             <!-- <i class="fas fa-question"></i> -->
             <fa name="question-circle"></fa>
             Questions
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="user/answers">
+          <a class="nav-link" [routerLink]="['/','user', 'answers']">
             <!-- <i class="fas fa-reply"></i>  -->
             <fa name="reply"></fa>
             Answers
