@@ -53,7 +53,7 @@ export class QuestionDetailsComponent implements OnInit {
     });
     this.following = false;
     this.questionService.checkfollowing(this.questionId).subscribe(result => {
-    this.following = result.data.following;
+      this.following = result.data.following;
     });
     this.commentPage = false;
     this.answerPage = false;
@@ -104,17 +104,20 @@ export class QuestionDetailsComponent implements OnInit {
   }
 
   submitQuestionComment() {
-    let subjectId = this.questionIdCommented.value;
-    let comment = { body: this.comment.value };
+    const subjectId = this.questionIdCommented;
+    const comment = { body: this.comment.value };
 
     this.commentService.addQuestionComment(comment, subjectId)
       .pipe(first())
       .subscribe((result:any) => {
         this.ngOnInit();
         this.modalService.dismissAll();
-        this.message = result.message;
-        if (result.success === true) { this.type = 'success'; }
-        if (result.success !== true) { this.type = 'danger'; }
+        // tslint:disable-next-line:no-string-literal
+        this.message = result['message'];
+        // tslint:disable-next-line:no-string-literal
+        if (result['success'] === true) { this.type = 'success'; }
+        // tslint:disable-next-line:no-string-literal
+        if (result['success'] !== true) { this.type = 'danger'; }
       },
         error => {
           this.message = error.message;
@@ -123,17 +126,20 @@ export class QuestionDetailsComponent implements OnInit {
   }
 
   submitAnswerComment() {
-    let subjectId = this.answerIdCommented.value;
-    let comment = { body: this.comment.value };
+    const subjectId = this.answerIdCommented;
+    const comment = { body: this.comment.value };
 
     this.commentService.addAnswerComment(comment, subjectId)
       .pipe(first())
       .subscribe((result:any) => {
         this.ngOnInit();
         this.modalService.dismissAll();
-        this.message = result.message;
-        if (result.success === true) { this.type = 'success'; }
-        if (result.success !== true) { this.type = 'danger'; }
+        // tslint:disable-next-line:no-string-literal
+        this.message = result['message'];
+        // tslint:disable-next-line:no-string-literal
+        if (result['success'] === true) { this.type = 'success'; }
+        // tslint:disable-next-line:no-string-literal
+        if (result['success'] !== true) { this.type = 'danger'; }
       },
         error => {
           this.message = error.message;
@@ -150,9 +156,12 @@ export class QuestionDetailsComponent implements OnInit {
       .pipe(first())
       .subscribe((result:any) => {
         this.answer = new FormControl('');
-        this.message = result.message;
-        if (result.success === true) { this.type = 'success'; }
-        if (result.success !== true) { this.type = 'danger'; }
+        // tslint:disable-next-line:no-string-literal
+        this.message = result['message'];
+        // tslint:disable-next-line:no-string-literal
+        if (result['success'] === true) { this.type = 'success'; }
+        // tslint:disable-next-line:no-string-literal
+        if (result['success'] !== true) { this.type = 'danger'; }
       },
         error => {
           this.message = error.message;
@@ -178,23 +187,12 @@ export class QuestionDetailsComponent implements OnInit {
 
   downVoteQuestion(questionId: any) {
     this.questionService.downVoteQuestion(questionId)
-      .pipe(first())
-      .subscribe((result:any) => {
-        // document.getElementById(questionId).innerHTML--;
-        this.message = result.message;
-        if (result.success === true) { this.type = 'success'; }
-        if (result.success !== true) { this.type = 'danger'; }
-      },
-        error => {
-          this.message = error.message;
-          this.type = 'danger';
-        });
-
-  }
-
-
-  upVoteAnswer(answerId: any) {
-    this.answerService.upVoteAnswer(answerId)
+      // .pipe(first())
+      //   // document.getElementById(questionId).innerHTML--;
+      //   this.message = result.message;
+      //   if (result.success === true) { this.type = 'success'; }
+      //   if (result.success !== true) { this.type = 'danger'; }
+      // },
       .pipe(first())
       .subscribe((result:any) => {
         // document.getElementById(answerId).innerHTML++;

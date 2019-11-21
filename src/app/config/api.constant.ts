@@ -24,11 +24,11 @@ export let api = {
         ELASTIC_SEARCH: '/elastic-search/search/'
     },
     ANSWER: {
-        LISTBYQID: '/answers',
+        LISTBYQID: '/answers/question/',
         LIST_BY_USER: '/answers/users/',
         BYID: '/answers/',
         UPVOTE: '/upvote',
-        DOWNVOTE: '/donwvote',
+        DOWNVOTE: '/downvote',
         ADD: '/answers/',
         ANSWER_COMMENTS: '/comments/answers/'
     },
