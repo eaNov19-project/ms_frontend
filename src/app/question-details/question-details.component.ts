@@ -187,12 +187,6 @@ export class QuestionDetailsComponent implements OnInit {
 
   downVoteQuestion(questionId: any) {
     this.questionService.downVoteQuestion(questionId)
-      // .pipe(first())
-      //   // document.getElementById(questionId).innerHTML--;
-      //   this.message = result.message;
-      //   if (result.success === true) { this.type = 'success'; }
-      //   if (result.success !== true) { this.type = 'danger'; }
-      // },
       .pipe(first())
       .subscribe((result:any) => {
         // document.getElementById(answerId).innerHTML++;
