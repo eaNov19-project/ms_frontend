@@ -45,7 +45,7 @@ export class QuestionService {
         );
     }
 
-    addQuestion(questionObj: object): Observable<{ token: string }> {
+    addQuestion(questionObj: object): Observable<any> {
         return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.QUESTION.ADD, questionObj);
     }
 
@@ -57,7 +57,7 @@ export class QuestionService {
         );
     }
 
-    upVoteQuestion(questionId: any): Observable<{ token: string }> {
+    upVoteQuestion(questionId: any): Observable<any> {
         return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + '/questions/' + questionId + api.QUESTION.UPVOTE, {})
             .pipe(
                 map(result => {
@@ -66,7 +66,7 @@ export class QuestionService {
             );
     }
 
-    downVoteQuestion(questionId: any): Observable<{ token: string }> {
+    downVoteQuestion(questionId: any): Observable<any> {
         return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + '/questions/' + questionId + api.QUESTION.DOWNVOTE, {})
             .pipe(
                 map(result => {
@@ -75,11 +75,11 @@ export class QuestionService {
             );
     }
 
-    startFollowing(qid: any): Observable<{ token: string }> {
+    startFollowing(qid: any): Observable<any> {
         return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.QUESTION.FOLLOW + qid + '/follow', null);
     }
 
-    checkfollowing(qid: any): Observable<{ token: string }> {
+    checkfollowing(qid: any): Observable<any> {
         return this.http.get<{ token: string }>(environment.baseUrl.API_GATEWAY + api.QUESTION.FOLLOW + qid + '/checkfollowing');
     }
 }

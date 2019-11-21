@@ -109,7 +109,7 @@ export class QuestionDetailsComponent implements OnInit {
 
     this.commentService.addQuestionComment(comment, subjectId)
       .pipe(first())
-      .subscribe(result => {
+      .subscribe((result:any) => {
         this.ngOnInit();
         this.modalService.dismissAll();
         this.message = result.message;
@@ -128,7 +128,7 @@ export class QuestionDetailsComponent implements OnInit {
 
     this.commentService.addAnswerComment(comment, subjectId)
       .pipe(first())
-      .subscribe(result => {
+      .subscribe((result:any) => {
         this.ngOnInit();
         this.modalService.dismissAll();
         this.message = result.message;
@@ -148,7 +148,7 @@ export class QuestionDetailsComponent implements OnInit {
 
     this.answerService.addAnswer(answer, questnId)
       .pipe(first())
-      .subscribe(result => {
+      .subscribe((result:any) => {
         this.answer = new FormControl('');
         this.message = result.message;
         if (result.success === true) { this.type = 'success'; }
@@ -163,8 +163,8 @@ export class QuestionDetailsComponent implements OnInit {
   upVoteQuestion(questionId: any) {
     this.questionService.upVoteQuestion(questionId)
       .pipe(first())
-      .subscribe(result => {
-        document.getElementById(questionId).innerHTML++;
+      .subscribe((result:any) => {
+        // document.getElementById(questionId).innerHTML++;
         this.message = result.message;
         if (result.success === true) { this.type = 'success'; }
         if (result.success !== true) { this.type = 'danger'; }
@@ -179,8 +179,8 @@ export class QuestionDetailsComponent implements OnInit {
   downVoteQuestion(questionId: any) {
     this.questionService.downVoteQuestion(questionId)
       .pipe(first())
-      .subscribe(result => {
-        document.getElementById(questionId).innerHTML--;
+      .subscribe((result:any) => {
+        // document.getElementById(questionId).innerHTML--;
         this.message = result.message;
         if (result.success === true) { this.type = 'success'; }
         if (result.success !== true) { this.type = 'danger'; }
@@ -196,8 +196,8 @@ export class QuestionDetailsComponent implements OnInit {
   upVoteAnswer(answerId: any) {
     this.answerService.upVoteAnswer(answerId)
       .pipe(first())
-      .subscribe(result => {
-        document.getElementById(answerId).innerHTML++;
+      .subscribe((result:any) => {
+        // document.getElementById(answerId).innerHTML++;
         this.message = result.message;
         if (result.success === true) { this.type = 'success'; }
         if (result.success !== true) { this.type = 'danger'; }
@@ -212,8 +212,8 @@ export class QuestionDetailsComponent implements OnInit {
   downVoteAnswer(answerId: any) {
     this.answerService.downVoteAnswer(answerId)
       .pipe(first())
-      .subscribe(result => {
-        document.getElementById(answerId).innerHTML--;
+      .subscribe((result:any) => {
+        // document.getElementById(answerId).innerHTML--;
         this.message = result.message;
         if (result.success === true) { this.type = 'success'; }
         if (result.success !== true) { this.type = 'danger'; }
@@ -227,7 +227,7 @@ export class QuestionDetailsComponent implements OnInit {
 
   startFollowing() {
     this.questionService.startFollowing(this.questionId).pipe(first())
-      .subscribe(result => {
+      .subscribe((result:any) => {
         this.message = result.message;
         if (result.success === true) { this.type = 'success'; }
         if (result.success !== true) { this.type = 'danger'; }
@@ -239,14 +239,14 @@ export class QuestionDetailsComponent implements OnInit {
   }
 
   loadQuestionComments() {
-    this.questionService.getQuestionComments(this.questionId).subscribe(result => {
+    this.questionService.getQuestionComments(this.questionId).subscribe((result:any) => {
       this.question.topComments = result.data.comments;
       this.commentPage = true;
     });
   }
 
   loadAllAnswers() {
-    this.answerService.getAnswersByQuestionId(this.questionId).subscribe(result => {
+    this.answerService.getAnswersByQuestionId(this.questionId).subscribe((result:any) => {
       console.log(result.data.answers);
       this.question.topAnswers = result.data.answers;
       this.answerPage = true;
