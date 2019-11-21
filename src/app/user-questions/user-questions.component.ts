@@ -38,7 +38,7 @@ export class UserQuestionsComponent implements OnInit {
   }
   openEditModal(questionId: String){
     this.editModalRef = this.modalService.open(AddQuestionComponent);
-    if(this.editModalRef){
+    // if(this.editModalRef){
       this.editModalRef.componentInstance.action = 'Edit';
       this.editModalRef.componentInstance.questionId = questionId;
       // this.editModalRef.onClose.subscribe(() => {
@@ -46,7 +46,7 @@ export class UserQuestionsComponent implements OnInit {
       //     // this.questionService.getQuestionByUser()
       //     // this.getQuestions();
       // })
-    }
+    // }
     
   }
   // removeQuestion(questionId: String){

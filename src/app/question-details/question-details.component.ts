@@ -3,10 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Question, QuestionResult } from '../models/question.model';
 import { QuestionService } from '../services/question.service';
 import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AnswerService } from '../services/answer.service';
 import { first } from 'rxjs/operators';
 import { CommentService } from '../services/comment.service';
+import { CommentModalComponent } from './comment-modal.component';
 
 @Component({
   selector: 'app-question-details',
@@ -32,6 +33,8 @@ export class QuestionDetailsComponent implements OnInit {
   type = null;
   following: boolean;
 
+  answerForm: FormGroup;
+
   constructor(
     private route: ActivatedRoute, private questionService: QuestionService, private answerService: AnswerService,
     private commentService: CommentService, private router: Router, private modalService: NgbModal) {
@@ -46,137 +49,78 @@ export class QuestionDetailsComponent implements OnInit {
     this.comment = new FormControl('');
     this.answer = new FormControl('');
   }
-
-  ngOnInit() {
+  getQuestion(){
     this.questionService.getQuestionById(this.questionId).subscribe(result => {
       this.question = result.data.question;
     });
+    this.questionService.checkfollowing(this.questionId).subscribe(
+      result => {
+        this.following = result.data.following;
+      }
+    )
+  }
+  ngOnInit() {
+    this.getQuestion();
     this.following = false;
     this.questionService.checkfollowing(this.questionId).subscribe(result => {
       this.following = result.data.following;
     });
     this.commentPage = false;
     this.answerPage = false;
+
+    // init form    
+    this.answerForm = new FormGroup({
+      body: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(500)
+      ])
+    }); 
   }
-
-  openQuestionComment(content, questionId) {
-    this.answerIdCommented = null;
-    this.questionIdCommented = null;
-    this.modalService.open(content, this.modalOptions).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-
+  OnSubmitAnswerForm(questionId: string) {
+    this.answerService.addAnswer(this.answerForm.value, questionId)
+    .pipe(first())
+    .subscribe((result:any) => {
+      this.answerForm.reset();
+      this.message = result['message'];
+      this.type = result['success'] ? 'success' : 'danger';
+      this.getQuestion();
+    },
+      error => {
+        this.message = error.message;
+        this.type = 'danger';
+      });
+  }
+  openQuestionComment(questionId: string) {    
+    const addModalRef = this.modalService.open(CommentModalComponent);    
+    addModalRef.componentInstance.title = 'Enter comment for question';
+    addModalRef.componentInstance.subjectType = 'question';
+    addModalRef.componentInstance.subjectId = questionId;
+    addModalRef.result.then((data) => {
+      // on close
+      this.getQuestion();
     }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      // on dismiss
     });
-    this.questionIdCommented = questionId;
   }
 
-  openAnswerComment(content, answerId) {
-    this.questionIdCommented = null;
-    this.answerIdCommented = null;
-    this.modalService.open(content, this.modalOptions).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-
+  openAnswerComment(answerId: string) { 
+    const addModalRef = this.modalService.open(CommentModalComponent);     
+    addModalRef.componentInstance.title = 'Enter comment for answer';
+    addModalRef.componentInstance.subjectType = 'answer';
+    addModalRef.componentInstance.subjectId = answerId;  
+    addModalRef.result.then((data) => {
+      // on close
+      this.getQuestion();
     }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      // on dismiss
     });
-    this.answerIdCommented = answerId;
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-  submitComment() {
-    if (this.answerIdCommented == null && this.questionIdCommented != null) {
-      this.submitQuestionComment();
-
-    }
-    if (this.answerIdCommented != null && this.questionIdCommented == null) {
-      this.submitAnswerComment();
-    }
-  }
-
-  submitQuestionComment() {
-    const subjectId = this.questionIdCommented;
-    const comment = { body: this.comment.value };
-
-    this.commentService.addQuestionComment(comment, subjectId)
-      .pipe(first())
-      .subscribe((result:any) => {
-        this.ngOnInit();
-        this.modalService.dismissAll();
-        // tslint:disable-next-line:no-string-literal
-        this.message = result['message'];
-        // tslint:disable-next-line:no-string-literal
-        if (result['success'] === true) { this.type = 'success'; }
-        // tslint:disable-next-line:no-string-literal
-        if (result['success'] !== true) { this.type = 'danger'; }
-      },
-        error => {
-          this.message = error.message;
-          this.type = 'danger';
-        });
-  }
-
-  submitAnswerComment() {
-    const subjectId = this.answerIdCommented;
-    const comment = { body: this.comment.value };
-
-    this.commentService.addAnswerComment(comment, subjectId)
-      .pipe(first())
-      .subscribe((result:any) => {
-        this.ngOnInit();
-        this.modalService.dismissAll();
-        // tslint:disable-next-line:no-string-literal
-        this.message = result['message'];
-        // tslint:disable-next-line:no-string-literal
-        if (result['success'] === true) { this.type = 'success'; }
-        // tslint:disable-next-line:no-string-literal
-        if (result['success'] !== true) { this.type = 'danger'; }
-      },
-        error => {
-          this.message = error.message;
-          this.type = 'danger';
-        });
-  }
-
-
-  submitAnswer(questionId: any) {
-    let questnId = questionId;
-    let answer = { body: this.answer.value };
-
-    this.answerService.addAnswer(answer, questnId)
-      .pipe(first())
-      .subscribe((result:any) => {
-        this.answer = new FormControl('');
-        // tslint:disable-next-line:no-string-literal
-        this.message = result['message'];
-        // tslint:disable-next-line:no-string-literal
-        if (result['success'] === true) { this.type = 'success'; }
-        // tslint:disable-next-line:no-string-literal
-        if (result['success'] !== true) { this.type = 'danger'; }
-      },
-        error => {
-          this.message = error.message;
-          this.type = 'danger';
-        });
   }
 
   upVoteQuestion(questionId: any) {
     this.questionService.upVoteQuestion(questionId)
       .pipe(first())
       .subscribe((result:any) => {
-        // document.getElementById(questionId).innerHTML++;
-        this.message = result.message;
-        if (result.success === true) { this.type = 'success'; }
-        if (result.success !== true) { this.type = 'danger'; }
+        this.getQuestion();
       },
         error => {
           this.message = error.message;
@@ -189,10 +133,7 @@ export class QuestionDetailsComponent implements OnInit {
     this.questionService.downVoteQuestion(questionId)
       .pipe(first())
       .subscribe((result:any) => {
-        // document.getElementById(answerId).innerHTML++;
-        this.message = result.message;
-        if (result.success === true) { this.type = 'success'; }
-        if (result.success !== true) { this.type = 'danger'; }
+        this.getQuestion();
       },
         error => {
           this.message = error.message;
@@ -201,20 +142,28 @@ export class QuestionDetailsComponent implements OnInit {
 
   }
 
-  downVoteAnswer(answerId: any) {
+  downVoteAnswer(answerId: string) {
     this.answerService.downVoteAnswer(answerId)
       .pipe(first())
       .subscribe((result:any) => {
-        // document.getElementById(answerId).innerHTML--;
-        this.message = result.message;
-        if (result.success === true) { this.type = 'success'; }
-        if (result.success !== true) { this.type = 'danger'; }
+        this.getQuestion();
       },
         error => {
           this.message = error.message;
           this.type = 'danger';
         });
 
+  }
+  upVoteAnswer(answerId: string) {
+    this.answerService.upVoteAnswer(answerId)
+      .pipe(first())
+      .subscribe((result:any) => {
+        this.getQuestion();
+      },
+        error => {
+          this.message = error.message;
+          this.type = 'danger';
+        });
   }
 
   startFollowing() {
@@ -223,6 +172,7 @@ export class QuestionDetailsComponent implements OnInit {
         this.message = result.message;
         if (result.success === true) { this.type = 'success'; }
         if (result.success !== true) { this.type = 'danger'; }
+        this.getQuestion();
       },
         error => {
           this.message = error.message;

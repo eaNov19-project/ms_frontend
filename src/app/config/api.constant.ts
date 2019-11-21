@@ -12,6 +12,7 @@ export let api = {
         SAVE_V2: '/users/edit'
     },
     QUESTION: {
+        BASE: '/questions/',
         LIST: '/questions/',
         LIST_BY_USER: '/questions/users/',
         ADD: '/questions/',
@@ -19,7 +20,8 @@ export let api = {
         SEARCH: '/search/',
         UPVOTE: '/upvote',
         DOWNVOTE: '/downvote',
-        FOLLOW: '/questions/',
+        FOLLOW: '/follow',
+        CHECK_FOLLOW: '/checkfollowing',
         QUESTION_COMMENTS: '/comments/questions/',
         ELASTIC_SEARCH: '/elastic-search/search/'
     },

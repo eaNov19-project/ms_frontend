@@ -6,7 +6,7 @@ import {api} from '../config/api.constant';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {tokenGetter, tokenRemove, tokenSetter} from '../util/token.helper'; 
 import { environment } from 'src/environments/environment';
-import { userInfoGetter } from '../util/userinfo.helper';
+import { userInfoGetter, userInfoRemove } from '../util/userinfo.helper';
 import { UserInfo } from '../models/user.model';
 
 const helper = new JwtHelperService();
@@ -50,6 +50,7 @@ export class AuthService {
 
   logout() {
     tokenRemove();
+    userInfoRemove();
   }
 
   public get loggedIn(): boolean {

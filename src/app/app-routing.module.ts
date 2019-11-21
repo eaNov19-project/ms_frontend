@@ -16,6 +16,7 @@ import { EditDashboardModalComponent } from './dashboard/edit-dashboard-modal.co
 import { TeamComponent } from './team/team.component';
 import { QuestionSearchResultComponent } from './question-search-result/question-search-result.component';
 import { ErrorComponent } from './error/error.component';
+import { CommentModalComponent } from './question-details/comment-modal.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'user/viewquestion/:id', component: ViewQuestionComponent },
   { path: 'user/answers', component: UserAnswersComponent },
   { path: 'user/editanswer/:id', component: EditAnswerComponent },
+  { path: 'user/comment', component: CommentModalComponent },
   { path: 'team', component: TeamComponent},
   { path: 'search/:q', component: QuestionSearchResultComponent },
   { path: '**', component: ErrorComponent }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { api } from '../config/api.constant';
 import { environment } from 'src/environments/environment';
+import { Question } from '../models/question.model';
 
 @Injectable({
     providedIn: 'root'
@@ -46,7 +47,7 @@ export class QuestionService {
     }
 
     addQuestion(questionObj: object): Observable<any> {
-        return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.QUESTION.ADD, questionObj);
+        return this.http.post<any>(environment.baseUrl.API_GATEWAY + api.QUESTION.ADD, questionObj);
     }
 
     searchQuestion(query: any): Observable<any> {
@@ -57,8 +58,8 @@ export class QuestionService {
         );
     }
 
-    upVoteQuestion(questionId: any): Observable<any> {
-        return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + '/questions/' + questionId + api.QUESTION.UPVOTE, {})
+    upVoteQuestion(questionId: string): Observable<any> {
+        return this.http.patch(environment.baseUrl.API_GATEWAY + api.QUESTION.BASE + questionId + api.QUESTION.UPVOTE, {})
             .pipe(
                 map(result => {
                     return result;
@@ -66,8 +67,8 @@ export class QuestionService {
             );
     }
 
-    downVoteQuestion(questionId: any): Observable<any> {
-        return this.http.patch<{ token: string }>(environment.baseUrl.API_GATEWAY + '/questions/' + questionId + api.QUESTION.DOWNVOTE, {})
+    downVoteQuestion(questionId: string): Observable<any> {
+        return this.http.patch(environment.baseUrl.API_GATEWAY + api.QUESTION.BASE + questionId + api.QUESTION.DOWNVOTE, {})
             .pipe(
                 map(result => {
                     return result;
@@ -75,11 +76,11 @@ export class QuestionService {
             );
     }
 
-    startFollowing(qid: any): Observable<any> {
-        return this.http.post<{ token: string }>(environment.baseUrl.API_GATEWAY + api.QUESTION.FOLLOW + qid + '/follow', null);
+    startFollowing(questionId: string): Observable<any> {
+        return this.http.post(environment.baseUrl.API_GATEWAY + api.QUESTION.BASE + questionId + api.QUESTION.FOLLOW, {});
     }
 
-    checkfollowing(qid: any): Observable<any> {
-        return this.http.get<{ token: string }>(environment.baseUrl.API_GATEWAY + api.QUESTION.FOLLOW + qid + '/checkfollowing');
+    checkfollowing(questionId: string): Observable<any> {
+        return this.http.get(environment.baseUrl.API_GATEWAY + api.QUESTION.BASE + questionId + api.QUESTION.CHECK_FOLLOW);
     }
 }
