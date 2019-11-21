@@ -1,20 +1,14 @@
 <div class="container pt-5">
-    <p class="alert alert-{{type}} alert-dismissible" *ngIf="message" role="alert">{{message}}<button aria-label="Close" class="close" type="button"><span aria-hidden="true">×</span></button></p>
+  <p class="alert alert-{{type}} alert-dismissible" *ngIf="message" role="alert">{{message}}<button aria-label="Close"
+      class="close" type="button"><span aria-hidden="true">×</span></button></p>
   <div class="row">
     <div class="col-10">
       <h4 class="text-left">{{ question?.title }}</h4>
     </div>
     <span class="col-2 text-right">
-      <span *ngIf="!following"
-        style="cursor: pointer;"
-        (click)="startFollowing()"
-        class="badge badge-primary"
-        >Follow</span
-      >
-      <span *ngIf="following"
-        class="badge badge-success"
-        >Already Following</span
-      >
+      <span *ngIf="!following" style="cursor: pointer;" (click)="startFollowing()"
+        class="badge badge-primary">Follow</span>
+      <span *ngIf="following" class="badge badge-success">Already Following</span>
     </span>
   </div>
   <div class="card">
@@ -23,29 +17,19 @@
         <div class="col-md-12" style="min-width: 100!important;">
           <div>
             <p>
-              <strong *ngIf="question?.userEmail"
-                >{{ question?.userEmail }}&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                &nbsp;&nbsp; &nbsp;</strong
-              >
+              <strong *ngIf="question?.userEmail">{{ question?.userEmail }}&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                &nbsp;&nbsp; &nbsp;</strong>
 
               {{ question?.created | date: "dd-MMM-yyyy  h:mm a" }}
 
               <small class="float-right">
-                <span
-                  class="font-weight-bold text-success"
-                  style="cursor: pointer;"
-                  title="Upvote"
-                  (click)="upVoteQuestion(question?.id)"
-                >
+                <span class="font-weight-bold text-success" style="cursor: pointer;" title="Upvote"
+                  (click)="upVoteQuestion(question?.id)">
                   <i class="fa fa-thumbs-up"></i>
-                </span >
-                &nbsp;<span  id="{{question?.id}}">{{ question?.upvotes }} </span>&nbsp;
-                <span
-                  class="font-weight-bold text-danger"
-                  style="cursor: pointer;"
-                  title="Downvote"
-                  (click)="downVoteQuestion(question?.id)"
-                >
+                </span>
+                &nbsp;<span id="{{question?.id}}">{{ question?.upvotes }} </span>&nbsp;
+                <span class="font-weight-bold text-danger" style="cursor: pointer;" title="Downvote"
+                  (click)="downVoteQuestion(question?.id)">
                   <i class="fa fa-thumbs-down"></i>
                 </span>
               </small>
@@ -55,11 +39,8 @@
               {{ question?.body }}
             </p>
             <p>
-              <span
-                style="cursor: pointer;"
-                class="float-right badge badge-info ml-2"
-                (click)="openQuestionComment(mymodal, question?.id)"
-              >
+              <span style="cursor: pointer;" class="float-right badge badge-info ml-2"
+                (click)="openQuestionComment(mymodal, question?.id)">
                 <i class="fa fa-reply"></i> Comment
               </span>
             </p>
@@ -72,56 +53,36 @@
               <div class="row">
                 <small class="col-9">{{ comment?.body }}</small>
                 <small class="col-3 text-right float-right">
-                  {{ question?.created | date: "dd-MMM-yyyy  h:mm a" }}</small
-                >
+                  {{ question?.created | date: "dd-MMM-yyyy  h:mm a" }}</small>
               </div>
             </div>
-            <span
-              (click)="loadQuestionComments()"
-              *ngIf="!commentPage"
-              class="badge badge-secondary mt-2 "
-              style="cursor: pointer;"
-              >Load More</span
-            >
+            <span (click)="loadQuestionComments()" *ngIf="!commentPage" class="badge badge-secondary mt-2 "
+              style="cursor: pointer;">Load More</span>
           </div>
         </div>
       </div>
       <hr />
-      <div
-        class="card card-inner"
-        *ngFor="
+      <div class="card card-inner" *ngFor="
           let answer of question?.topAnswers
             | paginate: { itemsPerPage: 5, currentPage: p1 }
-        "
-      >
+        ">
         <div class="card-body" *ngIf="answer.body != null">
           <div class="row">
             <div class="col-md-12">
               <div>
                 <p>
-                  <strong *ngIf="answer?.userEmail"
-                    >{{ answer?.userEmail }}&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                    &nbsp;&nbsp; &nbsp;</strong
-                  >
+                  <strong *ngIf="answer?.userEmail">{{ answer?.userEmail }}&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                    &nbsp;&nbsp; &nbsp;</strong>
                   {{ answer?.created | date: "dd-MMM-yyyy  h:mm a" }}
 
                   <small class="float-right">
-                    <span
-                      class="font-weight-bold text-success"
-                      title="Upvote"
-                      style="cursor: pointer;"
-                      (click)="upVoteAnswer(answer?.id)"
-                    >
+                    <span class="font-weight-bold text-success" title="Upvote" style="cursor: pointer;"
+                      (click)="upVoteAnswer(answer?.id)">
                       <i class="fa fa-thumbs-up"></i>
-                    </span  >
+                    </span>
                     &nbsp;<span id="{{answer.id}}">{{ answer?.votes }}</span> &nbsp;
-                    <span
-                      class="font-weight-bold text-danger"
-                      title="Downvote"
-                      style="cursor: pointer;"
-                     
-                      (click)="downVoteAnswer(answer?.id)"
-                    >
+                    <span class="font-weight-bold text-danger" title="Downvote" style="cursor: pointer;"
+                      (click)="downVoteAnswer(answer?.id)">
                       <i class="fa fa-thumbs-down"></i>
                     </span>
                   </small>
@@ -132,23 +93,19 @@
                 </div>
 
                 <p>
-                  <span
-                    style="cursor: pointer;"
-                    class="float-right badge badge-info ml-2"
-                    (click)="openAnswerComment(mymodal, answer?.id)"
-                  >
+                  <span style="cursor: pointer;" class="float-right badge badge-info ml-2"
+                    (click)="openAnswerComment(mymodal, answer?.id)">
                     <i class="fa fa-reply"></i> Comment
                   </span>
                 </p>
               </div>
               <div class="clearfix"></div>
               <hr />
-              <div *ngFor="let comment of answer?.topComments">
+              <div *ngFor="let comment of answer.topComments">
                 <div class="row">
-                  <small class="col-9">{{ answer?.body }}</small>
+                  <small class="col-9">{{ comment?.body }}</small>
                   <small class="float-right col-3 text-right">
-                    {{ question?.created | date: "dd-MMM-yyyy  h:mm a" }}</small
-                  >
+                    {{ comment?.created | date: "dd-MMM-yyyy  h:mm a" }}</small>
                 </div>
               </div>
             </div>
@@ -159,13 +116,8 @@
         </div>
       </div>
 
-      <span
-        (click)="loadAllAnswers()"
-        *ngIf="!answerPage"
-        class="badge badge-secondary mt-2 float-right"
-        style="cursor: pointer;"
-        >Load More</span
-      >
+      <span (click)="loadAllAnswers()" *ngIf="!answerPage" class="badge badge-secondary mt-2 float-right"
+        style="cursor: pointer;">Load More</span>
       <div class="float-right p-2" *ngIf="answerPage">
         <small aria-label="Page navigation example float-right">
           <pagination-controls (pageChange)="p1 = $event"></pagination-controls>
@@ -176,11 +128,7 @@
     <div class="p-3">
       <h3>Your Answer</h3>
       <div class="form-group">
-        <textarea
-          rows="6"
-          [formControl]="answer"
-          class="form-control"
-        ></textarea>
+        <textarea rows="6" [formControl]="answer" class="form-control"></textarea>
       </div>
       <button class="btn btn-info" (click)="submitAnswer(question?.id)">
         Submit
@@ -193,31 +141,18 @@
   <ng-template #mymodal let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">{{ question?.title }}</h4>
-      <button
-        type="button"
-        class="close"
-        aria-label="Close"
-        (click)="modal.dismiss('Cross click')"
-      >
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
       <h3>Your Comment</h3>
       <div class="form-group">
-        <textarea
-          rows="8"
-          [formControl]="comment"
-          class="form-control"
-        ></textarea>
+        <textarea rows="8" [formControl]="comment" class="form-control"></textarea>
       </div>
     </div>
     <div class="modal-footer" style="justify-content: space-between!important;">
-      <button
-        type="button"
-        class="btn btn-outline-dark"
-        (click)="modal.close('Save click')"
-      >
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">
         Cancel
       </button>
       <button class="btn btn-info" (click)="submitComment()">Submit</button>
