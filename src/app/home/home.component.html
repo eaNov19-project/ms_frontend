@@ -12,12 +12,29 @@
     />
   </div>
   </div>
+  <div class="p-3">
+      <h3>Post your Question</h3>
+      <form [formGroup]="questionForm" (validSubmit)="OnSubmitQuestionForm()">
+          <div class="form-group">
+            <!-- <label for="exampleInputEmail1">Title</label> -->
+            <input class="form-control" type="text" formControlName="title" placeholder="Title">
+            <bfv-messages></bfv-messages>
+          </div>
+        <div class="form-group">
+          <textarea rows="6" formControlName="body" class="form-control"></textarea>
+          <bfv-messages></bfv-messages>
+        </div>
+        <button class="btn btn-info" type="submit">
+          Submit
+        </button>
+      </form>
+    </div>
   <h2>Recent Questions</h2>
   <div class="list-group">
     <!-- <div *ngFor="let question of questions "> -->
     <div *ngFor="let question of questions">
       <a
-        href="/questionDetails/{{ question.id }}"
+        [routerLink]="['/','questionDetails',question.id]"
         class="list-group-item list-group-item-action flex-column align-items-start "
       >
         <div class="d-flex w-100 justify-content-between">
